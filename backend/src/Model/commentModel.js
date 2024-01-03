@@ -1,17 +1,16 @@
 const { mongoose } = require('../Db/connectToDb');
 
-const questionSchema = new mongoose.Schema({
+const commentSchema = new mongoose.Schema({
     title: String,
     content:String,
     images:[],
-    tags: [],
     upvotes:Number,
     downvotes:Number,
     createdAt: Date,
-    answers :[],
+    replies :[],
     lastUpdated: { type: Date, default: Date.now } 
 });
 
-const Question = mongoose.model('Question', questionSchema);
+const Comment = mongoose.model('Comment', commentSchema);
 
-module.exports = { Question };
+module.exports = { Comment };

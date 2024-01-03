@@ -1,5 +1,5 @@
-const  {User} = require('../Model/export')
-const {isalreadyPresentInDb} = require('../Db/export')
+const  {User} = require('../../Model/export')
+const {isalreadyPresentInDb} = require('../../Db/isalreadyPresentInDb')
 
 const duplicateUser = async(req,res,next) =>{    
     const {username} = req.body

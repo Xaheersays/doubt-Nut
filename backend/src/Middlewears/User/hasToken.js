@@ -1,4 +1,4 @@
-const {jwt} = require('../Util/jwtUtil')
+const {jwt} = require('../../Util/jwtUtil')
 const  hasToken = (req,res,next) => {  
     const token = req.headers.authorization
     const resp = jwt.verifyToken(token)
@@ -10,6 +10,5 @@ const  hasToken = (req,res,next) => {
 
     }
     next()
-
 }
 module.exports = {hasToken}

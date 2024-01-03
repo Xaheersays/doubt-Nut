@@ -1,4 +1,4 @@
-const {userType} = require('../Types/userType')
+const {userType} = require('../../Types/userType')
 
 const validateUserInput = (req,res,next)=>{
     console.log(req.body)

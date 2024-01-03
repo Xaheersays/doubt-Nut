@@ -18,13 +18,14 @@ router.post('/register',validateUserInput,duplicateUser,async(req,res)=>{
         return res.status(403).json({success:false,message:'user could not saved'})
     }
     return res.status(201).json(result)
-    //add to db     
+  
 
 })
 
 
 router.post('/postQuestion',hasToken,(req,res)=>{
-
+    const token = req.headers.authorization 
+    
 })
 
 module.exports = router;

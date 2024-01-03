@@ -1,6 +1,6 @@
-const {hasToken} =require('../Middlewears/hasToken')
-const {validateUserInput} =require('../Middlewears/validateUserInput')
-const {duplicateUser} =require('../Middlewears/duplicateUser')
+const {hasToken} =require('./User/hasToken')
+const {validateUserInput} =require('./User/validateUserInput')
+const {duplicateUser} =require('./User/duplicateUser')
 
 module.exports = {
     hasToken,validateUserInput,duplicateUser
