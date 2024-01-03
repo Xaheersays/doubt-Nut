@@ -1,12 +1,13 @@
-
+const  {User} = require('../Model/export')
 
 const isalreadyPresentInDb = async(collection,conditions) =>{
-    const doc = await collection.find(conditions)
+    console.log(collection,conditions)
+    const doc = await collection.findOne(conditions)
     if (doc){
-        //returning true which means  already present in db
+        //user present
         return true
     }
-    // not present in db
+    //not present
     return false
     
 }
