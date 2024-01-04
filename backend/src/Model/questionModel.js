@@ -10,7 +10,8 @@ const questionSchema = new mongoose.Schema({
     tags: [],
     upvotes:[],
     downvotes:[],
-    answers :[],
+    replies :[],
+    anscestry:[], 
 });
 
 const Question = mongoose.model('Question', questionSchema);

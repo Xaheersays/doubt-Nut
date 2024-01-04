@@ -6,7 +6,6 @@ const addFollower = async (u1, u2) => {
         return { success: false, message: 'A user cannot follow themselves.' };
       }
   
-    
       const resp1 = await addToSet({ _id: u1._id }, { $addToSet: { following: u2._id } });
   
       const resp2 = await addToSet({ _id: u2._id }, { $addToSet: { followers: u1._id } });
