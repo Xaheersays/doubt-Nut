@@ -66,11 +66,40 @@ router.post('/postQuestion',hasToken,async(req,res)=>{
 
         //this is another user's username
         // this route will get username's pfp , count ,askedQuestion,answered Question
-router.get('/:username/',hasToken, async (req, res) => {
-   
+router.get('/:username/followers',hasToken,async (req, res) => {
+    const {username} = req.params
+    const results = await fetchDocumentFromDb(User,{username})
+    console.log(results)
+    if(!results){
+        return res.status(400).json({success:false,message:'could not fetch followers'})
+    }
+    const followers = results.followers;
+    return res.status(201).json({
+        success:true,
+        message:'fetched all followers ',
+        followers,
+        followersCount:followers.length
+    })
+
+}); 
 
 
-  }); 
+router.get('/:username/following',hasToken,async (req, res) => {
+    const {username} = req.params
+    const results = await fetchDocumentFromDb(User,{username})
+    console.log(results)
+    if(!results){
+        return res.status(400).json({success:false,message:'could not fetch following'})
+    }
+    const following = results.following;
+    return res.status(201).json({
+        success:true,
+        message:'fetched all followings ',
+        following,
+        followingCount:following.length
+    })
+}); 
+
 
 
 router.post('/:username/follow',hasToken,usernameExists,async (req, res) => {
