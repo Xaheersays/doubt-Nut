@@ -6,5 +6,5 @@ const {jwt} = require('./jwtUtil')
 const {safeParseQuestion} = require('./postQuestionUtils/safeParseQuestion')
 const {addFollower} = require('./userUtils/addFollower')
 const  {removeFollower} = require('./userUtils/removeFollower')
-
-module.exports = {decodeToken,getToken,addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower,removeFollower}
+const {getBasicInfo} = require('./userUtils/getBasicInfo')
+module.exports = {decodeToken,getToken,addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower,removeFollower,getBasicInfo}

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {hasToken,validateUserInput,duplicateUser,usernameExists} =require('../Middlewears/export')
-const {addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower, removeFollower} =require('../Util/export')
+const {addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower, removeFollower,getBasicInfo,decodeToken} =require('../Util/export')
 const{saveToDb,fetchDocumentFromDb} = require('../Db/export');
 const { User } = require('../Model/userModel');
 
@@ -99,6 +99,21 @@ router.get('/:username/following',hasToken,async (req, res) => {
         followingCount:following.length
     })
 }); 
+
+//route gives basic info from uname,pfp,flw,flwin,askedQues,answeredQues
+router.get('/:username/profile',usernameExists,async(req,res)=>{
+    const {username} = req.params
+    const token = req.headers.authorization
+    const {password} = decodeToken(token)?.data
+    const data = await getBasicInfo(username,password)
+    return res.status(200).json({
+        success:true,
+        message:'successfully fetched user info',
+        data
+    })
+
+}) 
+
 
 
 
