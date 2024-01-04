@@ -7,8 +7,14 @@
         isAdmin:Boolean,
         askedQuestions : [],
         answeredQuestions :[],
-        followers:[],
-        following:[],
+        followers: {
+            type: [], 
+            unique: true, 
+          },
+        following: {
+            type: [], 
+            unique: true,  
+          },
         feed:[],
         drafts:[]
         //draft logic create a route which accepts headers and extract uname pass and match with the dbs unmae pass and allow the drafts

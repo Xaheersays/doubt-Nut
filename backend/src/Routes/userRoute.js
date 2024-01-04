@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {hasToken,validateUserInput,duplicateUser,usernameExists} =require('../Middlewears/export')
-const {addUserToDb,getDocFromToken,jwt,safeParseQuestion,decodeToken} =require('../Util/export')
+const {addUserToDb,getDocFromToken,jwt,safeParseQuestion,decodeToken,addFollower, removeFollower} =require('../Util/export')
 const{saveToDb,isalreadyPresentInDb,fetchDocumentFromDb} = require('../Db/export');
 const { User } = require('../Model/userModel');
 
@@ -76,7 +76,17 @@ router.post('/:username/follow',hasToken,usernameExists,async (req, res) => {
     const { username } = req.params;
     const followStatus = req.query.follow;
     const userTwoDoc = await fetchDocumentFromDb(User,{username})
-    res.send([userOneDoc,userTwoDoc]) 
+    //u1->following u2 
+    // u1's following shud have id of u2
+    // u2's follwers shud have id of u1 
+    
+    if (followStatus==='true'){
+        var  resp = await addFollower(userOneDoc,userTwoDoc)
+    }
+    else{
+        var resp = await removeFollower(userOneDoc,userTwoDoc)
+     }
+    return res.json(resp)
 
   });
 
