@@ -26,7 +26,6 @@ class JWT {
         try{
             const decoded = this.jwt.decode(token)
             const {username,password} = decoded
-            console.log(decoded)
             return  {username:username,password:password}
         }
         catch(e){

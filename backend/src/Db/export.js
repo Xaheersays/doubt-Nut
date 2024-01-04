@@ -1,4 +1,4 @@
 const {saveToDb} =require('./saveToDb')
 const { isalreadyPresentInDb } =require('./isalreadyPresentInDb')
-
-module.exports = {saveToDb,isalreadyPresentInDb} 
+const {fetchDocumentFromDb} = require('./fetchDocumentFromDb')
+module.exports = {saveToDb,isalreadyPresentInDb,fetchDocumentFromDb} 

@@ -6,9 +6,9 @@ const commentSchema = new mongoose.Schema({
     images:[],
     upvotes:Number,
     downvotes:Number,
-    createdAt: Date,
+    createdAt: { type: Date, default: Date.now } ,
     replies :[],
-    lastUpdated: { type: Date, default: Date.now } 
+    lastUpdated: { type: Date} 
 });
 
 const Comment = mongoose.model('Comment', commentSchema);

@@ -1,6 +1,4 @@
-const  {User} = require('../Model/export')
-
-const isalreadyPresentInDb = async(collection,conditions) =>{
+const fetchDocumentFromDb = async(collection,conditions) =>{
     console.log(collection,conditions)
     const doc = await collection.findOne(conditions)
     if (doc){
@@ -8,8 +6,8 @@ const isalreadyPresentInDb = async(collection,conditions) =>{
         return doc
     }
     //not present
-    return false
+    return null
     
 }
 
-module.exports = {isalreadyPresentInDb}
+module.exports = {fetchDocumentFromDb}

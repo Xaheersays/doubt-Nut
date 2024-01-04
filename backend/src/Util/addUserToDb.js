@@ -8,6 +8,7 @@ const addUserToDb = async(userInfo) =>{
     userInfo['answeredQuestion'] = []
     userInfo['followers'] = []
     userInfo['following'] = []
+    userInfo['drafts'] = []
 
     const userDoc =  new User(userInfo)
     const results = await saveToDb(userDoc)
