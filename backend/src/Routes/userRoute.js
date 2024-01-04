@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {hasToken,validateUserInput,duplicateUser} =require('../Middlewears/export')
-const {addUserToDb,getDocFromToken,jwt,safeParseQuestion} =require('../Util/export')
-const{saveToDb} = require('../Db/export')
+const {hasToken,validateUserInput,duplicateUser,usernameExists} =require('../Middlewears/export')
+const {addUserToDb,getDocFromToken,jwt,safeParseQuestion,decodeToken} =require('../Util/export')
+const{saveToDb,isalreadyPresentInDb,fetchDocumentFromDb} = require('../Db/export');
+const { User } = require('../Model/userModel');
+
 
 
 router.get('/', (req, res) => {
@@ -62,6 +64,21 @@ router.post('/postQuestion',hasToken,async(req,res)=>{
 
 })
 
+        //this is another user's username
+router.get('/:username/following',hasToken, async (req, res) => {
+   res.send('fdfdfdkfskj')
+  }); 
+
+
+router.post('/:username/follow',hasToken,usernameExists,async (req, res) => {
+    const token = req.headers.authorization
+    const userOneDoc = await getDocFromToken(token)
+    const { username } = req.params;
+    const followStatus = req.query.follow;
+    const userTwoDoc = await fetchDocumentFromDb(User,{username})
+    res.send([userOneDoc,userTwoDoc]) 
+
+  });
 
 
 

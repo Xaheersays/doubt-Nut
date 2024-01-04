@@ -1,7 +1,7 @@
 const {userType} = require('../../Types/userType')
 
 const validateUserInput = (req,res,next)=>{
-    console.log(req.body)
+   
     const { username ,password  } = req.body
     const result = userType.safeParse({username,password})
     if (!result.success){

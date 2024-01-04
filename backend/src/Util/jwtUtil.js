@@ -5,15 +5,12 @@ class JWT {
 
     sign (obj) {
         const token = this.jwt.sign(obj,this.JWT_PASSWORD);
-        console.log(token)
-    
         return token
     }
 
     verifyToken(token){
         try{
             const decoded = this.jwt.verify(token,this.JWT_PASSWORD)
-            console.log('done',decoded)
             return true;
     
         }catch(e){
