@@ -17,7 +17,6 @@ router.post('/register',validateUserInput,duplicateUser,async(req,res)=>{
     const {username,password} = req.body
     const userInfo = {username,password}
     const result = await addUserToDb(userInfo)
-    console.log(result)
     if(!result){
         return res.status(403).json({success:false,message:'user could not saved'})
     }
