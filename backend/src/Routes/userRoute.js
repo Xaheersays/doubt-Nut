@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {hasToken,validateUserInput,duplicateUser,usernameExists} =require('../Middlewears/export')
-const {addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower, removeFollower,getBasicInfo,decodeToken} =require('../Util/export')
+const {addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts} =require('../Util/export')
 const{saveToDb,fetchDocumentFromDb} = require('../Db/export');
 const { User } = require('../Model/userModel');
 
@@ -115,6 +115,14 @@ router.get('/:username/profile',usernameExists,async(req,res)=>{
 }) 
 
 
+router.get('/getDrafts',hasToken,async(req,res)=>{
+    const token = req.headers.authorization
+    const result = await  getDrafts(token)
+    return res.status(200).json(result)
+
+
+})
+
 
 
 router.post('/:username/follow',hasToken,usernameExists,async (req, res) => {
@@ -134,6 +142,13 @@ router.post('/:username/follow',hasToken,usernameExists,async (req, res) => {
 
   });
 
+
+//this route is /user/usernmae/question id/vote?vote=true or false
+// measns user is accessing username's quesution id  and voting it
+router.post('/:username/:questionId/vote',hasToken,usernameExists,async(req,res)=>{
+    res.send('done jii')
+    //will do 
+})
 
 
 

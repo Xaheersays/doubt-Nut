@@ -1,4 +1,5 @@
-const {addToSet}  = require('../../Db/export')
+const {addToSet}  = require('../../Db/export');
+const { User } = require('../../Model/export');
 const addFollower = async (u1, u2) => {
     try {
       
@@ -6,9 +7,9 @@ const addFollower = async (u1, u2) => {
         return { success: false, message: 'A user cannot follow themselves.' };
       }
   
-      const resp1 = await addToSet({ _id: u1._id }, { $addToSet: { following: u2._id } });
+      const resp1 = await addToSet({ _id: u1._id }, { $addToSet: { following: u2._id } },User);
   
-      const resp2 = await addToSet({ _id: u2._id }, { $addToSet: { followers: u1._id } });
+      const resp2 = await addToSet({ _id: u2._id }, { $addToSet: { followers: u1._id } },User);
   
       if (!resp1.success || !resp2.success) {
         throw new Error('DB internal error while updating followers.');

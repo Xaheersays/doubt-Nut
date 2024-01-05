@@ -1,11 +1,11 @@
-const {User} = require('../Model/export');
+const {User,Question} = require('../Model/export');
 
 
 
-const addToSet = async (query, update) => {
+const addToSet = async (query, update,collection) => {
   try {
     // Use updateOne with $addToSet to update the document
-    const result = await User.updateOne(query, update);
+    const result = await collection.updateOne(query, update);
 
     if (result.nModified === 0) {
       // If nModified is 0, it means the element was already in the set

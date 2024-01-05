@@ -1,11 +1,12 @@
-const {pullFromArray} =require('../../Db/export')
+const {pullFromArray} =require('../../Db/export');
+const { User } = require('../../Model/export');
 const removeFollower = async (u1, u2) => {
     try {
       // Pull u2._id from the following array of u1
-      const resp1 = await pullFromArray({ _id: u1._id }, { $pull: { following: u2._id } });
+      const resp1 = await pullFromArray({ _id: u1._id }, { $pull: { following: u2._id } } ,User);
   
       // Pull u1._id from the followers array of u2
-      const resp2 = await pullFromArray({ _id: u2._id }, { $pull: { followers: u1._id } });
+      const resp2 = await pullFromArray({ _id: u2._id }, { $pull: { followers: u1._id } },User);
   
       if (!resp1.success || !resp2.success) {
         throw new Error('DB internal error while updating followers/following.');

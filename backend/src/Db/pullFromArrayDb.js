@@ -1,9 +1,9 @@
-const { User } = require("../Model/export");
+const { collection } = require("../Model/export");
 
-const pullFromArray = async (query, update) => {
+const pullFromArray = async (query, update,collection) => {
     try {
       // Use updateOne with $pull to update the document
-      const result = await User.updateOne(query, update);
+      const result = await collection.updateOne(query, update);
   
       if (result.nModified === 0) {
         // If nModified is 0, it means the element was not found in the array
