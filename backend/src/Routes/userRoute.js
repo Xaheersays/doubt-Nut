@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {hasToken,validateUserInput,duplicateUser,usernameExists,questionBelongsToUser} =require('../Middlewears/export')
+const {hasToken,validateUserInput,duplicateUser,usernameExists,questionBelongsToUser,questionInDrafts} =require('../Middlewears/export')
 const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts} =require('../Util/export')
 const{fetchDocumentFromDb} = require('../Db/export');
 const { User } = require('../Model/userModel');
-const {addQuestion,removeQuestion} = require('../Util/postQuestionUtils/export')
+const {addQuestion,removeQuestion,getQuestionFromId} = require('../Util/postQuestionUtils/export')
 
 
 
@@ -48,6 +48,32 @@ router.delete('/question/:questionId',hasToken,questionBelongsToUser,async(req,r
     return res.send(result  )
 
 
+
+})
+
+router.get('/question/drafts/:questionId',hasToken,questionBelongsToUser,async(req,res)=>{
+    const qid = req.params.questionId
+    const qDoc  = await getQuestionFromId(qid);
+    if (!qDoc){
+        return res.status(404).json({
+            success:false,
+            message:'cant fetched question from draft'
+        })
+    }
+    if (qDoc.status==='active'){
+        return res.send({success:false,message:'this question is in active not in drafts'})
+    }
+    return res.status(201).json({success:true,
+        message:'fetched question from draft',
+        question:qDoc
+    })
+})
+
+router.get('/question/:questionId',questionInDrafts,async(req,res)=>{
+    const qid =req.params.questionId
+    const qDoc = await getQuestionFromId(qid)
+    return res.send(qDoc)
+    
 
 })
 

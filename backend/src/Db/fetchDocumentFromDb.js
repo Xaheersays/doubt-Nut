@@ -1,12 +1,16 @@
 const fetchDocumentFromDb = async(collection,conditions) =>{
-    console.log(collection,conditions)
-    const doc = await collection.findOne(conditions)
-    if (doc){
-        //user present
-        return doc
+    try{
+        const doc = await collection.findOne(conditions)
+        if (doc){
+            return doc
+            //user present
+        }
     }
-    //not present
-    return null
+    catch(error){
+        //not present
+        console.log(error)
+        return null
+    }
     
 }
 
