@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {hasToken,validateUserInput,duplicateUser,usernameExists} =require('../Middlewears/export')
-const {addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts} =require('../Util/export')
-const{saveToDb,fetchDocumentFromDb} = require('../Db/export');
+const {hasToken,validateUserInput,duplicateUser,usernameExists,questionBelongsToUser} =require('../Middlewears/export')
+const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts} =require('../Util/export')
+const{fetchDocumentFromDb} = require('../Db/export');
 const { User } = require('../Model/userModel');
-const {addQuestion} = require('../Util/postQuestionUtils/export')
+const {addQuestion,removeQuestion} = require('../Util/postQuestionUtils/export')
 
 
 
@@ -34,6 +34,21 @@ router.post('/postQuestion',hasToken,async(req,res)=>{
     }
     const result = await addQuestion(token,question,status)
     return res.status(201).json(result)
+})
+
+
+router.delete('/question/:questionId',hasToken,questionBelongsToUser,async(req,res)=>{
+    //this quid shud be present in db and also in userdocs asked/draft
+    //now question is atleast present in users doc
+    // lets delete it from question collen and user's doc
+    const token = req.headers.authorization
+    const qid = req.params.questionId
+    const {questionType} = req.body
+    const result = await removeQuestion(qid,token,questionType)
+    return res.send(result  )
+
+
+
 })
 
         //this is another user's username
@@ -125,4 +140,4 @@ router.post('/:username/:questionId/vote',hasToken,usernameExists,async(req,res)
 
 
 module.exports = router;
- 
+  
