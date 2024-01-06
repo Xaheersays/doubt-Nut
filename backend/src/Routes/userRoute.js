@@ -4,6 +4,7 @@ const {hasToken,validateUserInput,duplicateUser,usernameExists} =require('../Mid
 const {addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts} =require('../Util/export')
 const{saveToDb,fetchDocumentFromDb} = require('../Db/export');
 const { User } = require('../Model/userModel');
+const {addQuestion} = require('../Util/postQuestionUtils/export')
 
 
 
@@ -27,40 +28,12 @@ router.post('/register',validateUserInput,duplicateUser,async(req,res)=>{
 
 router.post('/postQuestion',hasToken,async(req,res)=>{
     const token = req.headers.authorization
-    // token to get username 
-    // search by usrname -> getDoc from db -> push it specified array | draft || askedQuestion
-    const userDoc = await getDocFromToken(token)
-
     const {title,content,images,tags,status} =  req.body
-
     const question = {
-        title,content,images,tags,
-        upvotes:[],
-        downvotes:[],
-        answers:[],
-        lastUpdated:new Date(Date.now()),
-        createdAt:new Date(Date.now()),
-        status
+        title,content,images,tags,status
     }
-
-    const result = safeParseQuestion(question)
-    if (!result){
-        return res.status(403).json({
-            success:false,
-            message:'some thing went wrong question format '
-        })
-    }
-    if(status==='inactive'){
-        userDoc.drafts.push(question)
-    }else{
-        userDoc.askedQuestions.push(question)
-    }
-    const resp = await saveToDb(userDoc)
-    if (!resp.success){
-        return res.status(403).json({...resp,message:'could not post the question'})
-    }
-    return res.status(201).json({...resp,message:'question saved to db'})
-
+    const result = await addQuestion(token,question,status)
+    return res.status(201).json(result)
 })
 
         //this is another user's username

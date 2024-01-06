@@ -4,18 +4,12 @@ const questionSchema = new mongoose.Schema({
     title: String,
     content:String,
     createdAt: Date,
-    status:Boolean,
+    status:String,
     lastUpdated: { type: Date, default: Date.now } ,
     images:[],
     tags: [],
-    upvotes:{
-        type: [], 
-        unique: true, 
-      },
-    downvotes:{
-        type: [], 
-        unique: true, 
-      },
+    upvotes:[],
+    downvotes:[],
     replies :[],
     anscestry:[], 
 });
