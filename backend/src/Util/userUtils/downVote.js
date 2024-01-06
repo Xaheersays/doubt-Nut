@@ -11,6 +11,7 @@ const addDownvote = async (uid, questionID) => {
   
       return { success: true, message: 'Downvote added.' };
     } catch (error) {
+      console.error('error : ',error)
       return { success: false, message: error.message };
     }
   };

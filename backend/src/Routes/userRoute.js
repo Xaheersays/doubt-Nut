@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {hasToken,validateUserInput,duplicateUser,usernameExists,questionBelongsToUser,questionInDrafts} =require('../Middlewears/export')
-const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts} =require('../Util/export')
+const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts, addUpvote, addDownvote} =require('../Util/export')
 const{fetchDocumentFromDb} = require('../Db/export');
 const { User } = require('../Model/userModel');
 const {addQuestion,removeQuestion,getQuestionFromId} = require('../Util/postQuestionUtils/export')
@@ -158,8 +158,22 @@ router.post('/:username/follow',hasToken,usernameExists,async (req, res) => {
 
 //this route is /user/usernmae/question id/vote?vote=true or false
 // measns user is accessing username's quesution id  and voting it
-router.post('/:username/:questionId/vote',hasToken,usernameExists,async(req,res)=>{
-    res.send('done jii')
+router.post('/:username/:questionId/vote',hasToken,usernameExists,questionInDrafts,async(req,res)=>{
+    // i want user id ->current user  then qid rest is done 
+    const token = req.headers.authorization
+    const userDoc =await getDocFromToken(token)
+    const uid = userDoc._id;
+    const vote = req.query.vote;
+    const qid = req.params.questionId
+    if (vote==='true'){
+        const upvote  = await addUpvote(uid,qid)
+        res.send(upvote)
+    }
+    else{
+        const downvote = await addDownvote(uid,qid)
+        res.send(downvote)
+    }
+    // upvote and downvote 
     //will do 
 })
 
