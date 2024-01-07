@@ -137,6 +137,17 @@ router.get('/getDrafts',hasToken,async(req,res)=>{
 })
 
 
+router.post('/:qcId/comment/create',hasToken,async(req,res)=>{
+    const token = req.headers.authorization
+    const {title,content,images,tags} =  req.body
+    const comment = {
+        title,content,images,tags
+    }
+    const result = await addQuestion(token,comment)
+    return res.status(201).json(result)
+})
+
+
 
 router.post('/:username/follow',hasToken,usernameExists,async (req, res) => {
     const token = req.headers.authorization
@@ -173,8 +184,6 @@ router.post('/:username/:questionId/vote',hasToken,usernameExists,questionInDraf
         const downvote = await addDownvote(uid,qid)
         res.send(downvote)
     }
-    // upvote and downvote 
-    //will do 
 })
 
 

@@ -1,6 +1,6 @@
 const z = require('zod');
 
-const questionType = z.object({
+const commentType = z.object({
     title: z.string(),
     content: z.string(),
     images: z.array(z.string()), 
@@ -10,9 +10,7 @@ const questionType = z.object({
     createdAt: z.date(),
     replies: z.array(z.unknown()), 
     lastUpdated: z.date(),
-    status: z.string(), 
-    authorId:z.unknown(),
     ancestry:z.array(z.unknown())
 });
 
-module.exports = { questionType };
+module.exports = { commentType };

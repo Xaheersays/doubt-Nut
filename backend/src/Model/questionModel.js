@@ -5,6 +5,7 @@ const questionSchema = new mongoose.Schema({
     content:String,
     createdAt: Date,
     status:String,
+    authorId: mongoose.Schema.Types.ObjectId,
     lastUpdated: { type: Date, default: Date.now } ,
     images:[],
     tags: [],

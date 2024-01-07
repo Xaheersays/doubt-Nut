@@ -1,7 +1,8 @@
 const {  addToSet } = require('../../Db/export');
 const {Question} = require('../../Model/export')
-
+const {removeVote} = require('./removeVote')
 const addUpvote = async (uid, questionID) => {
+  removeVote(uid,questionID,'downvotes')
   try {
     const resp = await addToSet({ _id: questionID }, { $addToSet: { upvotes: uid } },Question);
     if (!resp.success) {
