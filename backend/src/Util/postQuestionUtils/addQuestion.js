@@ -10,8 +10,6 @@ const addQuestion = async (token,rawQuestion,questionType) =>{
         lastUpdated:new Date(Date.now()),
         createdAt:new Date(Date.now()),
         authorId : 'dummy',
-        ancestry:[]
-        
     }
     const result = safeParseQuestion(question)
     if (!result){

@@ -6,15 +6,17 @@ const commentSchema = new mongoose.Schema({
     images:[],
     upvotes:[],
     downvotes:[],
-    createdAt:  { type: Date, default: Date.now },
     replies :[],
-    lastUpdated: { type: Date, default: Date.now } ,
     authorId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
-    }
+    },
+    parentId:{
+        type:mongoose.Schema.Types.ObjectId
+    },
+    // isParentQuestion : Boolean
 
-});
+},{timestamps:true});
 
 const Comment = mongoose.model('Comment', commentSchema);
 

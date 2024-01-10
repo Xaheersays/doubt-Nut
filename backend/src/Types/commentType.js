@@ -9,7 +9,9 @@ const commentType = z.object({
     createdAt: z.date(),
     replies: z.array(z.unknown()), 
     lastUpdated: z.date(),
-    authorId:z.unknown()
+    authorId:z.unknown(),
+    parentId:z.unknown(),
+    // isParentQuestion:z.boolean()
 });
 
 module.exports = { commentType };

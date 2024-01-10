@@ -12,8 +12,9 @@
         following:[],
         feed: [],
         drafts: [],
+        
         //draft logic create a route which accepts headers and extract uname pass and match with the dbs unmae pass and allow the drafts
-    });
+    },{timestamps:true});
   
     const User = mongoose.model('User',UserSchema)
     module.exports = {User}

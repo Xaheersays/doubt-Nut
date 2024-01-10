@@ -136,13 +136,23 @@ router.get('/getDrafts',hasToken,async(req,res)=>{
 
 })
 
-
-router.post('/:questionId/comment',hasToken,async(req,res)=>{
+router.post('/:questionId/answer',hasToken,async(req,res)=>{
     const token = req.headers.authorization
     const qid = req.params.questionId
-    const {title,content,images,tags,ancestry} =  req.body
+    const {title,content,images,tags} = req.body
+    const answer = {
+        title,content,images,tags,
+    }
+    const result = await addComment(answer,qid,token,'answer')
+    return res.send(result)
+})
+
+router.post('/:commentId/comment',hasToken,async(req,res)=>{
+    const token = req.headers.authorization
+    const qid = req.params.commentId
+    const {title,content,images,tags} =  req.body
     const comment = {
-        title,content,images,tags,ancestry
+        title,content,images,tags
     }
     const result =await addComment(comment,qid,token)
     return res.send(result)

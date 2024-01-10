@@ -12,7 +12,6 @@ const questionType = z.object({
     lastUpdated: z.date(),
     status: z.string(), 
     authorId:z.unknown(),
-    ancestry:z.array(z.unknown())
 });
 
 module.exports = { questionType };
