@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {hasToken,validateUserInput,duplicateUser,usernameExists,questionBelongsToUser,questionInDrafts} =require('../Middlewears/export')
-const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts, addUpvote, addDownvote} =require('../Util/export')
+const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts, addUpvote, addDownvote,addComment} =require('../Util/export')
 const{fetchDocumentFromDb} = require('../Db/export');
 const { User } = require('../Model/userModel');
 const {addQuestion,removeQuestion,getQuestionFromId} = require('../Util/postQuestionUtils/export')
@@ -137,16 +137,18 @@ router.get('/getDrafts',hasToken,async(req,res)=>{
 })
 
 
-router.post('/:qcId/comment/create',hasToken,async(req,res)=>{
+router.post('/:questionId/comment',hasToken,async(req,res)=>{
     const token = req.headers.authorization
-    const {title,content,images,tags} =  req.body
+    const qid = req.params.questionId
+    const {title,content,images,tags,ancestry} =  req.body
     const comment = {
-        title,content,images,tags
+        title,content,images,tags,ancestry
     }
-    const result = await addQuestion(token,comment)
-    return res.status(201).json(result)
+    const result =await addComment(comment,qid,token)
+    return res.send(result)
 })
 
+//first comment ka kaam hua hai / not tested 
 
 
 router.post('/:username/follow',hasToken,usernameExists,async (req, res) => {

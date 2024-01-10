@@ -4,12 +4,15 @@ const commentSchema = new mongoose.Schema({
     title: String,
     content:String,
     images:[],
-    upvotes:Number,
-    downvotes:Number,
+    upvotes:[],
+    downvotes:[],
     createdAt:  { type: Date, default: Date.now },
     replies :[],
     lastUpdated: { type: Date, default: Date.now } ,
-    anscestry:[],
+    authorId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    }
 
 });
 
