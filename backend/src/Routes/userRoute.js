@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const {hasToken,validateUserInput,duplicateUser,usernameExists,questionBelongsToUser,questionInDrafts} =require('../Middlewears/export')
-const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts, addUpvote, addDownvote,addComment} =require('../Util/export')
+const {hasToken,validateUserInput,duplicateUser,usernameExists,questionBelongsToUser,questionInDrafts,commentBelongsToUser,questionIdPresent,commentIdPresent} =require('../Middlewears/export')
+const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts, addUpvote, addDownvote,addComment,removeComment} =require('../Util/export')
 const{fetchDocumentFromDb} = require('../Db/export');
 const { User } = require('../Model/userModel');
 const {addQuestion,removeQuestion,getQuestionFromId} = require('../Util/postQuestionUtils/export')
@@ -13,6 +13,8 @@ router.get('/', (req, res) => {
   
 });
 
+
+// registration
 
 router.post('/register',validateUserInput,duplicateUser,async(req,res)=>{
     const {username,password} = req.body
@@ -26,6 +28,12 @@ router.post('/register',validateUserInput,duplicateUser,async(req,res)=>{
 })
 
 
+//signin : todo
+
+
+
+
+//post question 
 router.post('/postQuestion',hasToken,async(req,res)=>{
     const token = req.headers.authorization
     const {title,content,images,tags,status} =  req.body
@@ -35,8 +43,7 @@ router.post('/postQuestion',hasToken,async(req,res)=>{
     const result = await addQuestion(token,question,status)
     return res.status(201).json(result)
 })
-
-
+//delete question
 router.delete('/question/:questionId',hasToken,questionBelongsToUser,async(req,res)=>{
     //this quid shud be present in db and also in userdocs asked/draft
     //now question is atleast present in users doc
@@ -50,7 +57,7 @@ router.delete('/question/:questionId',hasToken,questionBelongsToUser,async(req,r
 
 
 })
-
+//get question from drafts
 router.get('/question/drafts/:questionId',hasToken,questionBelongsToUser,async(req,res)=>{
     const qid = req.params.questionId
     const qDoc  = await getQuestionFromId(qid);
@@ -68,7 +75,7 @@ router.get('/question/drafts/:questionId',hasToken,questionBelongsToUser,async(r
         question:qDoc
     })
 })
-
+//get question from public
 router.get('/question/:questionId',questionInDrafts,async(req,res)=>{
     const qid =req.params.questionId
     const qDoc = await getQuestionFromId(qid)
@@ -77,8 +84,10 @@ router.get('/question/:questionId',questionInDrafts,async(req,res)=>{
 
 })
 
+
         //this is another user's username
         // this route will get username's pfp , count ,askedQuestion,answered Question
+//followers get
 router.get('/:username/followers',hasToken,async (req, res) => {
     const {username} = req.params
     const results = await fetchDocumentFromDb(User,{username})
@@ -96,7 +105,7 @@ router.get('/:username/followers',hasToken,async (req, res) => {
 
 }); 
 
-
+//followiung get
 router.get('/:username/following',hasToken,async (req, res) => {
     const {username} = req.params
     const results = await fetchDocumentFromDb(User,{username})
@@ -113,6 +122,15 @@ router.get('/:username/following',hasToken,async (req, res) => {
     })
 }); 
 
+//get drafts of user
+router.get('/getDrafts',hasToken,async(req,res)=>{
+    const token = req.headers.authorization
+    const result = await  getDrafts(token)
+    return res.status(200).json(result)
+
+
+})
+
 //route gives basic info from uname,pfp,flw,flwin,askedQues,answeredQues
 router.get('/:username/profile',usernameExists,async(req,res)=>{
     const {username} = req.params
@@ -127,40 +145,7 @@ router.get('/:username/profile',usernameExists,async(req,res)=>{
 
 }) 
 
-
-router.get('/getDrafts',hasToken,async(req,res)=>{
-    const token = req.headers.authorization
-    const result = await  getDrafts(token)
-    return res.status(200).json(result)
-
-
-})
-
-router.post('/:questionId/answer',hasToken,async(req,res)=>{
-    const token = req.headers.authorization
-    const qid = req.params.questionId
-    const {title,content,images,tags} = req.body
-    const answer = {
-        title,content,images,tags,
-    }
-    const result = await addComment(answer,qid,token,'answer')
-    return res.send(result)
-})
-
-router.post('/:commentId/comment',hasToken,async(req,res)=>{
-    const token = req.headers.authorization
-    const qid = req.params.commentId
-    const {title,content,images,tags} =  req.body
-    const comment = {
-        title,content,images,tags
-    }
-    const result =await addComment(comment,qid,token)
-    return res.send(result)
-})
-
-//first comment ka kaam hua hai / not tested 
-
-
+// follow
 router.post('/:username/follow',hasToken,usernameExists,async (req, res) => {
     const token = req.headers.authorization
     const userOneDoc = await getDocFromToken(token)
@@ -179,8 +164,46 @@ router.post('/:username/follow',hasToken,usernameExists,async (req, res) => {
   });
 
 
+// answering a question 
+router.post('/:questionId/answer',hasToken,questionIdPresent,async(req,res)=>{
+    const token = req.headers.authorization
+    const qid = req.params.questionId
+    const {title,content,images,tags} = req.body
+    const answer = {
+        title,content,images,tags,
+    }
+    const result = await addComment(answer,qid,token,'answer')
+    return res.send(result)
+})
+
+//commenting
+router.post('/:commentId/comment',hasToken,commentIdPresent,async(req,res)=>{
+    const token = req.headers.authorization
+    const qid = req.params.commentId
+    const {title,content,images,tags} =  req.body
+    const comment = {
+        title,content,images,tags
+    }
+    const result =await addComment(comment,qid,token)
+    return res.send(result)
+})
+
+//deleting comment
+router.delete('/comment/:commentId/delete',hasToken,commentIdPresent,commentBelongsToUser,async(req,res)=>{
+    const commentId = req.params.commentId
+    const token = req.headers.authorization
+    const result = await removeComment(commentId,token)
+    return res.send(result) 
+})
+
+//first comment ka kaam hua hai / not tested 
+
+
+
+
 //this route is /user/usernmae/question id/vote?vote=true or false
 // measns user is accessing username's quesution id  and voting it
+//upvt / dwnvt
 router.post('/:username/:questionId/vote',hasToken,usernameExists,questionInDrafts,async(req,res)=>{
     // i want user id ->current user  then qid rest is done 
     const token = req.headers.authorization

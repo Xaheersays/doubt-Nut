@@ -12,4 +12,5 @@ const {addUpvote} = require('./userUtils/upVote')
 const {addDownvote} = require('./userUtils/downVote')
 const {removeVote} = require('./userUtils/removeVote')
 const{addComment}= require('./commentUtils/addComment')
-module.exports = {decodeToken,getToken,addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower,removeFollower,getBasicInfo,getDrafts, addUpvote,addDownvote,removeVote,addComment} 
+const {removeComment} =  require('./commentUtils/removeComment')
+module.exports = {decodeToken,getToken,addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower,removeFollower,getBasicInfo,getDrafts, addUpvote,addDownvote,removeVote,addComment,removeComment} 
