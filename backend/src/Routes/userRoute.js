@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const {hasToken,validateUserInput,duplicateUser,usernameExists,questionBelongsToUser,questionInDrafts,commentBelongsToUser,questionIdPresent,commentIdPresent} =require('../Middlewears/export')
-const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts, addUpvote, addDownvote,addComment,removeComment} =require('../Util/export')
+const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts, addUpvote, addDownvote,addComment,removeComment,getTrendingTags} =require('../Util/export')
 const{fetchDocumentFromDb} = require('../Db/export');
 const { User } = require('../Model/userModel');
-const {addQuestion,removeQuestion,getQuestionFromId} = require('../Util/postQuestionUtils/export')
+const {addQuestion,removeQuestion,getQuestionFromId} = require('../Util/postQuestionUtils/export');
+const { addTags } = require('../Util/tagUtils/addTags');
 
 
 
@@ -41,6 +42,7 @@ router.post('/postQuestion',hasToken,async(req,res)=>{
         title,content,images,tags,status
     }
     const result = await addQuestion(token,question,status)
+    await addTags(tags,result.qid)
     return res.status(201).json(result)
 })
 //delete question
@@ -220,6 +222,10 @@ router.post('/:username/:questionId/vote',hasToken,usernameExists,questionInDraf
         res.send(downvote)
     }
 })
+
+
+
+// gettop10 tags 
 
 
 

@@ -13,4 +13,5 @@ const {addDownvote} = require('./userUtils/downVote')
 const {removeVote} = require('./userUtils/removeVote')
 const{addComment}= require('./commentUtils/addComment')
 const {removeComment} =  require('./commentUtils/removeComment')
-module.exports = {decodeToken,getToken,addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower,removeFollower,getBasicInfo,getDrafts, addUpvote,addDownvote,removeVote,addComment,removeComment} 
+const {getTrendingTags} = require('./tagUtils/getTrendingTags')
+module.exports = {decodeToken,getToken,addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower,removeFollower,getBasicInfo,getDrafts, addUpvote,addDownvote,removeVote,addComment,removeComment,getTrendingTags} 

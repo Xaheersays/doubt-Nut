@@ -1,5 +1,5 @@
 const {Question} = require('./questionModel')
 const {User} = require('./userModel')
 const {Comment} = require('./commentModel')
-
-module.exports = {Question,User,Comment}
+const {Tag} = require('./TagModel')
+module.exports = {Question,User,Comment,Tag}

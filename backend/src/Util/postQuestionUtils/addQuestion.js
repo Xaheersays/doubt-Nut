@@ -39,7 +39,7 @@ const addQuestion = async (token,rawQuestion,questionType) =>{
     }
     const saveUser  = await saveToDb(userDoc)
     if(!saveUser.success)return saveUser
-    return {success:true,message:'question has been posted sucessfully'}
+    return {success:true,message:'question has been posted sucessfully',qid:questionDoc._id}
 }
 
 module.exports = {addQuestion}
