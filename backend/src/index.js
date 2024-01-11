@@ -10,6 +10,8 @@ app.use("/user", userRouter)
 const questionRouter = require('./Routes/questionRoute')
 app.use("/question",questionRouter)
 
+const adminRouter = require('./Routes/adminRoute')
+app.use('/admin',adminRouter)
 const {getTrendingTags,getFeedViaTag} = require('./Util/export')
 
 // app.use(bodyParser)

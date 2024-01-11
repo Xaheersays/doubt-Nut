@@ -12,7 +12,19 @@
         following:[],
         feed: [],
         drafts: [],
-        isAdmin:{type:Boolean,default:false}
+        isAdmin:{type:Boolean,default:false},
+        
+        notification: {
+          prev: { type: Number, default: 0 },
+          curr: { type: Number, default: 0 },
+          nots: [
+            {
+              message: { type: String, required: true },
+              timestamp: { type: Date, default: Date.now },
+            }
+          ]
+        } 
+        
         
         //draft logic create a route which accepts headers and extract uname pass and match with the dbs unmae pass and allow the drafts
     },{timestamps:true});
