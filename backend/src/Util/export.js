@@ -14,4 +14,6 @@ const {removeVote} = require('./userUtils/removeVote')
 const{addComment}= require('./commentUtils/addComment')
 const {removeComment} =  require('./commentUtils/removeComment')
 const {getTrendingTags} = require('./tagUtils/getTrendingTags')
-module.exports = {decodeToken,getToken,addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower,removeFollower,getBasicInfo,getDrafts, addUpvote,addDownvote,removeVote,addComment,removeComment,getTrendingTags} 
+const {getFeedViaTag} = require('./tagUtils/getFeedViaTag')
+const {getUserFeed} = require('./userUtils/getUserFeed')
+module.exports = {decodeToken,getToken,addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower,removeFollower,getBasicInfo,getDrafts, addUpvote,addDownvote,removeVote,addComment,removeComment,getTrendingTags,getFeedViaTag,getUserFeed} 

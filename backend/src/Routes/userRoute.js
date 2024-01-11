@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {hasToken,validateUserInput,duplicateUser,usernameExists,questionBelongsToUser,questionInDrafts,commentBelongsToUser,questionIdPresent,commentIdPresent} =require('../Middlewears/export')
-const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts, addUpvote, addDownvote,addComment,removeComment,getTrendingTags} =require('../Util/export')
+const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts, addUpvote, addDownvote,addComment,removeComment,getUserFeed} =require('../Util/export')
 const{fetchDocumentFromDb} = require('../Db/export');
 const { User } = require('../Model/userModel');
 const {addQuestion,removeQuestion,getQuestionFromId} = require('../Util/postQuestionUtils/export');
@@ -198,7 +198,6 @@ router.delete('/comment/:commentId/delete',hasToken,commentIdPresent,commentBelo
     return res.send(result) 
 })
 
-//first comment ka kaam hua hai / not tested 
 
 
 
@@ -225,7 +224,12 @@ router.post('/:username/:questionId/vote',hasToken,usernameExists,questionInDraf
 
 
 
-// gettop10 tags 
+//get feed for a particular user via followers and following
+router.get('/feed',hasToken,async(req,res)=>{
+    const token = req.headers.authorization
+    const feed = await getUserFeed(token)
+    return res.send(feed)
+})
 
 
 
