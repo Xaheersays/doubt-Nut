@@ -17,4 +17,6 @@ const {getTrendingTags} = require('./tagUtils/getTrendingTags')
 const {getFeedViaTag} = require('./tagUtils/getFeedViaTag')
 const {getUserFeed} = require('./userUtils/getUserFeed')
 const {reportQuestion} = require('./reportUtils/reportQuestion')
-module.exports = {decodeToken,getToken,addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower,removeFollower,getBasicInfo,getDrafts, addUpvote,addDownvote,removeVote,addComment,removeComment,getTrendingTags,getFeedViaTag,getUserFeed,reportQuestion} 
+const {deleteQuestion} = require('./adminUtils.js/deleteQuestion')
+const {sortReportCategory} = require('./adminUtils.js/sortReportCategory')
+module.exports = {decodeToken,getToken,addUserToDb,getDocFromToken,jwt,safeParseQuestion,addFollower,removeFollower,getBasicInfo,getDrafts, addUpvote,addDownvote,removeVote,addComment,removeComment,getTrendingTags,getFeedViaTag,getUserFeed,reportQuestion,deleteQuestion,sortReportCategory} 

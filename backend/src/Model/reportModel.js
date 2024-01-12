@@ -21,6 +21,10 @@ const reportSchema = new mongoose.Schema({
     type: Number,
     default: 1,
   },
+  actionTaken :{
+      type : Boolean ,
+      default : false
+    }
 });
 
 reportSchema.statics.incrementReportCount = async function (questionId, category, reporterId) {
@@ -50,6 +54,24 @@ reportSchema.statics.incrementReportCount = async function (questionId, category
     return {sucess:true , message:'cant add report rn '}
   }
 };
+
+reportSchema.statics.sortCategory = async function (reportId,category) {
+  try{
+    const reports = await this.findOne({_id:reportId})
+    if (!reports) {
+      throw new Error('Report not found');
+    }
+    const filteredReports = reports.reports.filter(report => {
+      if (report.category === category){
+        return {reporterId:report.reporterId , _id : report._id}
+      }
+    })
+    return  filteredReports
+  }catch(err){
+    console.error(err)
+    return []
+  }
+}
 
 const Report = mongoose.model('Report', reportSchema);
 
