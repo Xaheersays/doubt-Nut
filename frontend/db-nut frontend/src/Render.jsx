@@ -1,5 +1,6 @@
 import React from "react"
-import {Container, Editor, Header,Login,Register,PostQuestion,AlignRight,Helper,Loader,AlignCenter} from './Components/export'
+import {Container, Editor, Header,Login,Register,PostQuestion
+,AlignRight,Helper,Loader,AlignCenter,Avatar} from './Components/export'
 
 import { useSelector } from "react-redux"
 function Render() {
@@ -9,8 +10,8 @@ function Render() {
   return (
     <>
       <div className="mb-20">
-        <Header></Header>
         <Container>
+        <Header></Header>
           {<Helper>
             <AlignRight>
                 <PostQuestion/>
@@ -21,9 +22,10 @@ function Render() {
           {showEditor && <Editor placeholder={"yooo"}></Editor>}
           <Container>
             <AlignCenter>
-              <Loader/>
+              {/* <Loader/> */}
             </AlignCenter>
           </Container>
+          <Avatar></Avatar>
         </Container>
       </div>
     </>

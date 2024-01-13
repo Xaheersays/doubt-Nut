@@ -2,7 +2,7 @@ import React from 'react'
 
 function AlignCenter({children}) {
   return (
-    <div className='flex justify-center items-center	'>
+    <div className='flex justify-center items-center'>
       {children}
     </div>
   )

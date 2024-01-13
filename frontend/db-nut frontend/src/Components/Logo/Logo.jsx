@@ -5,11 +5,9 @@ import logoimg from '../../assets/logo.png'
 function Logo() {
   return (
     <div>
-      <Container>
-          <div className='h-16 w-16 '>
-            <img className='m-2' src={logoimg} alt="" />
-          </div>
-      </Container>
+      <div className='h-16 w-16 '>
+        <img  src={logoimg} alt="" />
+      </div>
     </div>
   )
 }
