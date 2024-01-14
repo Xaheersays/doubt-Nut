@@ -1,15 +1,15 @@
-import React from 'react'
+import React,{memo} from 'react'
 import { Container } from '../export'
 import logoimg from '../../assets/logo.png'
 
-function Logo() {
+function Logo({className}) {
   return (
     <div>
-      <div className='h-16 w-16 '>
-        <img  src={logoimg} alt="" />
+      <div className={`${className}`} >
+        <img src={logoimg} alt="" />
       </div>
     </div>
   )
 }
 
-export default Logo
+export default memo(Logo);

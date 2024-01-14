@@ -16,5 +16,7 @@ import ListPopup from './PopUp/ListPopup'
 import Strip from "./PopUp/Strip";
 import Follower from "./Avatar/Follower";
 import Following from "./Avatar/Following";
-
-export {Logo,Container,Button,Header,Avatar,Register,Login,Editor,PostQuestion,AlignRight,Helper,Loader,AlignCenter,ShowPfp,ListPopup,Strip,Follower,Following}
+import Profile from './Profile/Profile'
+import QuestionFrameCard from "./Profile/QuestionFrameCard";
+import AskedQuestions from './Profile/AskedQuestions'
+export {Logo,Container,Button,Header,Avatar,Register,Login,Editor,PostQuestion,AlignRight,Helper,Loader,AlignCenter,ShowPfp,ListPopup,Strip,Follower,Following,Profile,QuestionFrameCard,AskedQuestions}

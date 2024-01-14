@@ -19,8 +19,8 @@ function Avatar() {
           <ShowPfp source={logoImg} size={''}/>
         </div>
         <div className='flex gap-3 '>
-          <Button onClick={displayFWPopup} btnName={'Followers'}/>
-          <Button onClick={displayFGPopup} btnName={'Following'}/>
+          <Button onClick={displayFGPopup} btnName={'Following'} className={'text-sm md:text-md'}/>
+          <Button onClick={displayFWPopup} btnName={'Followers'} className={'text-sm md:text-md'}/>
         </div>
       </div>
     </AlignCenter>

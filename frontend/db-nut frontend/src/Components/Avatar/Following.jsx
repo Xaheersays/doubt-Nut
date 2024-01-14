@@ -11,7 +11,7 @@ function Following() {
   return (
     <>
       {showPopup &&  <AlignCenter>
-      <div  className='w-1/2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 h-96 overflow-y-scroll border  py-4 rounded-md '>
+      <div  className='w-full md:w-1/2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 h-96 overflow-y-scroll border  py-4 rounded-md text-sm md:text-md '>
         <ListPopup data={following} title={'FOLLOWING'} dispatchFunction={toggleFGPopup}/>
       </div>
       </AlignCenter>}
