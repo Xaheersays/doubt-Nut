@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { toggleFGPopup,toggleFWPopup } from '../../Store/PopupSlice';
 
 function Avatar() {
-  
   const dispatch = useDispatch()
   const displayFWPopup = ()=>{
     dispatch(toggleFWPopup())
