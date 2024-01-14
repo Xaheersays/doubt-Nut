@@ -1,19 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  showPopup : false
+  showFWPopup : false,
+  showFGPopup : false,
 }
 
 
 export const PopupSlice = createSlice({
-  name:'Loader',
+  name:'popup',
   initialState,
   reducers :{
-    togglePopup : (state)=>{
-        state.showPopup = !state.showPopup
+    toggleFWPopup : (state)=>{
+      state.showFGPopup = false
+        state.showFWPopup = !state.showFWPopup
+    },
+    toggleFGPopup:(state)=>{
+      state.showFWPopup = false
+      state.showFGPopup = !state.showFGPopup
+      
     }
   }
 })
 
-export  const {togglePopup} = PopupSlice.actions;
+export  const {toggleFGPopup,toggleFWPopup} = PopupSlice.actions;
 export default PopupSlice.reducer

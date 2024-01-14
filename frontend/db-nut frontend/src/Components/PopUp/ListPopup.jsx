@@ -1,11 +1,11 @@
 import React from 'react';
 import { AlignRight, Strip } from '../export';
-import { useSelector, useDispatch } from 'react-redux';
-import { togglePopup } from '../../Store/PopupSlice';
+import {  useDispatch } from 'react-redux';
 
-function ListPopup({ data, title }) {
-  // const showPopup = useSelector((state) => state.popup.showPopup);
-  // const dispatch = useDispatch();
+
+function ListPopup({ data, title,dispatchFunction }) {
+  
+  const dispatch = useDispatch();
 
   function generateRandomId() {
     const randomId = Math.floor(Math.random() * 9000000000) + 1000000000;
@@ -19,7 +19,7 @@ function ListPopup({ data, title }) {
           <div className='sticky top-0 z-50'>
             <AlignRight>
               <div
-                onClick={() => dispatch(togglePopup())}
+                onClick={() => dispatch(dispatchFunction())}
                 className='bg-slate-600 bg-opacity-50 active:scale-95 text-white rounded focus:outline-none focus:shadow-outline backdrop-filter backdrop-blur-md flex justify-center items-center h-10 w-10 font-semibold cursor-pointer my-2'
               >
                 X

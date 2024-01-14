@@ -1,10 +1,11 @@
 import React from 'react'
 import { ListPopup,AlignCenter } from '../export'
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { toggleFWPopup } from '../../Store/PopupSlice';
 
 
 function Follower() {
-  const showPopup = useSelector((state) => state.popup.showPopup);
+  const showPopup = useSelector((state) => state.popup.showFWPopup);
 
   const followers = []
   for(let i=0 ;i<100 ;i++){
@@ -13,8 +14,8 @@ function Follower() {
   return (
     <>
       {showPopup &&  <AlignCenter>
-      <div  className=' w-1/2  scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 h-96 overflow-y-scroll'>
-        <ListPopup data={followers} title={'FOLLOWERS'}/>
+        <div className='w-1/2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 h-96 overflow-y-scroll border  py-4 rounded-md '>
+        <ListPopup data={followers} title={'FOLLOWERS'} dispatchFunction={toggleFWPopup}/>
       </div>
       </AlignCenter>}
     </>

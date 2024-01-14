@@ -1,14 +1,17 @@
 import React from 'react'
 import { Button,AlignCenter ,ShowPfp} from '../export';
 import logoImg from '../../assets/logo.png'
-import { useSelector,useDispatch } from 'react-redux';
-import { togglePopup } from '../../Store/PopupSlice';
+import { useDispatch } from 'react-redux';
+import { toggleFGPopup,toggleFWPopup } from '../../Store/PopupSlice';
 
 function Avatar() {
-  const showPopup = useSelector(state=>state.popup.showPopup)
+  
   const dispatch = useDispatch()
-  const displayPopup = ()=>{
-    dispatch(togglePopup())
+  const displayFWPopup = ()=>{
+    dispatch(toggleFWPopup())
+  }
+  const displayFGPopup = ()=>{
+    dispatch(toggleFGPopup())
   }
   return (
     <AlignCenter>
@@ -17,8 +20,8 @@ function Avatar() {
           <ShowPfp source={logoImg} size={''}/>
         </div>
         <div className='flex gap-3 '>
-          <Button onClick={displayPopup} btnName={'Followers'}/>
-          <Button onClick={displayPopup} btnName={'Following'}/>
+          <Button onClick={displayFWPopup} btnName={'Followers'}/>
+          <Button onClick={displayFGPopup} btnName={'Following'}/>
         </div>
       </div>
     </AlignCenter>
