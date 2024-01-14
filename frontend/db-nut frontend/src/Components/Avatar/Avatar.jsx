@@ -1,19 +1,24 @@
 import React from 'react'
-import { AvatarGenerator } from 'random-avatar-generator';
-import { Button,AlignCenter } from '../export';
+import { Button,AlignCenter ,ShowPfp} from '../export';
 import logoImg from '../../assets/logo.png'
-function Avatar() {
-  const generator = new AvatarGenerator();
+import { useSelector,useDispatch } from 'react-redux';
+import { togglePopup } from '../../Store/PopupSlice';
 
+function Avatar() {
+  const showPopup = useSelector(state=>state.popup.showPopup)
+  const dispatch = useDispatch()
+  const displayPopup = ()=>{
+    dispatch(togglePopup())
+  }
   return (
     <AlignCenter>
       <div className='flex flex-col justify-center items-center gap-10 my-10'>
         <div className='h-44 w-44 cursor-pointer flex justify-center items-center '>
-          <img src={logoImg} alt="" />
+          <ShowPfp source={logoImg} size={''}/>
         </div>
         <div className='flex gap-3 '>
-          <Button btnName={'Followers'}/>
-          <Button btnName={'Following'}/>
+          <Button onClick={displayPopup} btnName={'Followers'}/>
+          <Button onClick={displayPopup} btnName={'Following'}/>
         </div>
       </div>
     </AlignCenter>

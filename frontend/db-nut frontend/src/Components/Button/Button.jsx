@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Button({btnName,className,handleClick}) {
+function Button({btnName,className,onClick}) {
   return (
     
       
       <button
-        onClick={handleClick}
+        onClick={onClick}
         type="button"
         data-te-ripple-init
         data-te-ripple-color="light"

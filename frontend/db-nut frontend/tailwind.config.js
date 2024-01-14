@@ -26,5 +26,5 @@ module.exports = {
     extend: {},
   },
   darkMode: "class",
-  plugins:[require("tw-elements/dist/plugin.cjs")],
+  plugins:[require("tw-elements/dist/plugin.cjs"),require('tailwind-scrollbar'),],
 };

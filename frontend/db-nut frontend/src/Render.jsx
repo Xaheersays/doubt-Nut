@@ -1,6 +1,6 @@
 import React from "react"
 import {Container, Editor, Header,Login,Register,PostQuestion
-,AlignRight,Helper,Loader,AlignCenter,Avatar} from './Components/export'
+,AlignRight,Helper,Loader,AlignCenter,Avatar,Follower,Following } from './Components/export'
 
 import { useSelector } from "react-redux"
 function Render() {
@@ -26,6 +26,8 @@ function Render() {
             </AlignCenter>
           </Container>
           <Avatar></Avatar>
+          <Follower></Follower>
+          <Following></Following>
         </Container>
       </div>
     </>

@@ -11,4 +11,10 @@ import AlignRight from './Container/AlignRight'
 import Helper  from './Helper/Helper'
 import Loader from "./Loader/Loader";
 import AlignCenter from "./Container/AlignCenter";
-export {Logo,Container,Button,Header,Avatar,Register,Login,Editor,PostQuestion,AlignRight,Helper,Loader,AlignCenter}
+import ShowPfp from "./Avatar/ShowPfp";
+import ListPopup from './PopUp/ListPopup'
+import Strip from "./PopUp/Strip";
+import Follower from "./Avatar/Follower";
+import Following from "./Avatar/Following";
+
+export {Logo,Container,Button,Header,Avatar,Register,Login,Editor,PostQuestion,AlignRight,Helper,Loader,AlignCenter,ShowPfp,ListPopup,Strip,Follower,Following}
