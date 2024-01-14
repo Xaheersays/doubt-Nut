@@ -1,22 +1,37 @@
 const {fetchDocumentFromDb} = require('../../Db/export')
 const {User,Question,Comment} =  require('../../Model/export')
 
-const task = async(questions,answers,askedQuestions,answeredQuestions)=>{
-    try{
-        for(const qid of askedQuestions){
-            const qobj = await Question.findOne({_id:qid},{title:1,upvotes:1,downvotes:1,createdAt:1,updatedAt:1})
-            if (qobj)questions.push(qobj)
+const task = async (questions, answers, askedQuestions, answeredQuestions) => {
+    try {
+        for (const qid of askedQuestions) {
+            const qobj = await Question.findOne(
+                { _id: qid },
+                { title: 1, upvotes: 1, downvotes: 1, createdAt: 1, updatedAt: 1, content: 1 }
+            );
+
+            if (qobj) {
+                qobj.content = qobj.content.substring(0, 10);
+                questions.push(qobj);
+            }
         }
-        for(const cmtid of answeredQuestions){
-            const cobj = await Comment.findOne({_id:cmtid},{title:1,upvotes:1,downvotes:1,createdAt:1,updatedAt:1})
-            if (cobj)answers.push(cobj)
+
+        for (const cmtid of answeredQuestions) {
+            const cobj = await Comment.findOne(
+                { _id: cmtid },
+                { title: 1, upvotes: 1, downvotes: 1, createdAt: 1, updatedAt: 1, content: 1 }
+            );
+
+            if (cobj) {
+                cobj.content = cobj.content.substring(0, 10);
+                answers.push(cobj);
+            }
         }
-        
-    }catch(err){
-        console.error(err)
-        return 
+    } catch (err) {
+        console.error(err);
+        return;
     }
-}
+};
+
 
 const getBasicInfo = async(username,password)=>{
     const doc = await fetchDocumentFromDb(User,{username})

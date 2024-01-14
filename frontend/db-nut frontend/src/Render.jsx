@@ -1,6 +1,6 @@
 import React from "react"
 import {Container, Editor, Header,Login,Register,PostQuestion
-,AlignRight,Helper,AlignCenter,Avatar,Follower,Following,Profile,AskedQuestions } from './Components/export'
+,AlignRight,Helper,AlignCenter,Avatar,Follower,Following,Profile,AskedQuestions,Answered,ProfilePage } from './Components/export'
 
 import { useSelector } from "react-redux"
 function Render() {
@@ -10,7 +10,16 @@ function Render() {
   return (
     <>
       <div className="mb-20">
-        <Header></Header>
+        
+            <ProfilePage/>
+      </div>
+    </>
+  )
+}
+
+export default Render
+
+{/* <Header></Header>
         <Container>
           {<Helper>
             <AlignRight>
@@ -23,17 +32,14 @@ function Render() {
           <Container>
             <AlignCenter>
               {/* <Loader/> */}
-            </AlignCenter>
-          </Container>
-          <Avatar></Avatar>
-          <Follower></Follower>
-          <Following></Following>
-          <Profile/>
-          <AskedQuestions/>
-        </Container>
-      </div>
-    </>
-  )
-}
-
-export default Render
+        //     </AlignCenter>
+        //   </Container>
+        //   <>
+        //     <Avatar></Avatar>
+        //     <Follower></Follower>
+        //     <Following></Following>
+        //     {/* <AskedQuestions/> */}
+        //     {/* <hr className="mt-10" /> */}
+        //     {/* <Answered/> */}
+        //   </>
+        // </Container> */}

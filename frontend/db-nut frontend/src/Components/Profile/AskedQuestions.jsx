@@ -1,7 +1,7 @@
 import React from 'react'
 //https://www.flowbite-react.com/docs/components/card hover pfp
 import  { formatDistanceToNow } from 'date-fns';
-import {QuestionFrameCard,AlignCenter} from '../export'
+import {QuestionFrameCard} from '../export'
 const data = {
   success: true,
   message: "successfully fetched user info",
@@ -138,31 +138,27 @@ const data = {
     ]
   }
 }
+
+
+
 function AskedQuestions() {
-
-  // fetch data and render 
-
-
-  const questions = data.data.questions
+  const questions = data.data.questions;
+  
   return (
-    // <AlignCenter>
-      <div className='flex  gap-2 flex-wrap justify-between items-center'>
-        {
-          questions.map(qobj=>{
-            
-            return <QuestionFrameCard key={qobj._id} title={qobj.title}
-                                      upvotes={qobj.upvotes.length}
-                                      downvotes={qobj.downvotes.length}
-                                      ct = {formatDistanceToNow(new Date(qobj.createdAt), { addSuffix: true })}
-                                      lt = {formatDistanceToNow(new Date(qobj.updatedAt), { addSuffix: true })}
-
-             />
-          })
-        }
-      </div>
-    // </AlignCenter>
-
-  )
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-3'>
+      {questions.map(qobj => (
+        <QuestionFrameCard
+          content={'asked Question Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis!'}
+          key={qobj._id}
+          title={qobj.title}
+          upvotes={qobj.upvotes.length}
+          downvotes={qobj.downvotes.length}
+          ct={formatDistanceToNow(new Date(qobj.createdAt), { addSuffix: true })}
+          className='bg-white p-4 rounded shadow'
+        />
+      ))}
+    </div>
+  );
 }
 
-export default AskedQuestions
+export default AskedQuestions;

@@ -149,8 +149,8 @@ function Answered() {
     mt-3'>
       {questions.map(qobj => (
         <QuestionFrameCard
-        content={'answered Question Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis!'}
-          key={qobj._id + '3232343434'}
+        content={'Draftes Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis!'}
+          key={qobj._id + 'dfm0000000000000dmfk'}
           title={qobj.title}
           upvotes={qobj.upvotes.length}
           downvotes={qobj.downvotes.length}

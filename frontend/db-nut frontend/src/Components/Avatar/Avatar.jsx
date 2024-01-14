@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{memo} from 'react'
 import { Button,AlignCenter ,ShowPfp} from '../export';
 import logoImg from '../../assets/logo.png'
 import { useDispatch } from 'react-redux';
@@ -27,4 +27,4 @@ function Avatar() {
   )
 }
 
-export default Avatar
+export default memo(Avatar)

@@ -19,4 +19,9 @@ import Following from "./Avatar/Following";
 import Profile from './Profile/Profile'
 import QuestionFrameCard from "./Profile/QuestionFrameCard";
 import AskedQuestions from './Profile/AskedQuestions'
-export {Logo,Container,Button,Header,Avatar,Register,Login,Editor,PostQuestion,AlignRight,Helper,Loader,AlignCenter,ShowPfp,ListPopup,Strip,Follower,Following,Profile,QuestionFrameCard,AskedQuestions}
+import Answered from "./Profile/Answered";
+import Draft from "./Profile/Draft";
+import ProfilePage from '../Pages/ProfilePage'
+
+
+export {Logo,Container,Button,Header,Avatar,Register,Login,Editor,PostQuestion,AlignRight,Helper,Loader,AlignCenter,ShowPfp,ListPopup,Strip,Follower,Following,Profile,QuestionFrameCard,AskedQuestions,Answered,Draft,ProfilePage}
