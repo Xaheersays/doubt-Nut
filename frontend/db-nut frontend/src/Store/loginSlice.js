@@ -1,4 +1,7 @@
-import { createSlice  } from "@reduxjs/toolkit";
+import { createSlice ,createAsyncThunk } from "@reduxjs/toolkit";
+
+export const DoLogin
+
 
 const initialState = {
     isLogin :  localStorage.getItem('doubtNutToken')?true:false
@@ -12,6 +15,7 @@ export const loginSlice = createSlice({
             localStorage.removeItem('doubtNutToken')
             state.isLogin = false
         }
+        
     }
 })
 

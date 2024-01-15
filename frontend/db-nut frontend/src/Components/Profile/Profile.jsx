@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,memo } from 'react';
 import { Avatar, AskedQuestions,Answered,Draft } from '../export'; // Import components for each tab
 
 function Profile() {
@@ -6,7 +6,7 @@ function Profile() {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    
+    // TODO: edit route
 
   };
 
@@ -27,4 +27,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default memo(Profile);

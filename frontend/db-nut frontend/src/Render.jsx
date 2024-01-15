@@ -10,8 +10,8 @@ function Render() {
   return (
     <>
       <div className="mb-20">
-        
-            <ProfilePage/>
+      <Avatar></Avatar>
+            {/* <ProfilePage/> */}
       </div>
     </>
   )
