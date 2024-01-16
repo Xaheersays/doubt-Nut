@@ -18,13 +18,13 @@ router.get('/', (req, res) => {
 // registration
 
 router.post('/register',validateUserInput,duplicateUser,async(req,res)=>{
-    const {username,password} = req.body
-    const userInfo = {username,password}
+    const {username,password,email} = req.body
+    const userInfo = {username,password,email}
     const result = await addUserToDb(userInfo)
     if(!result){
         return res.status(403).json({success:false,message:'user could not saved'})
     }
-    result.token = jwt.sign({username,password})
+    result.token = jwt.sign({username,password,email})
     return res.status(201).json(result)
 })
 

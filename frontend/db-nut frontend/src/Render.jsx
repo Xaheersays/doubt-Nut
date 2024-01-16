@@ -1,8 +1,8 @@
 import React from "react"
 import {Container, Editor, Header,Login,Register,PostQuestion
 ,AlignRight,Helper,AlignCenter,Avatar,Follower,Following,Profile,AskedQuestions,Answered,ProfilePage } from './Components/export'
-
 import { useSelector } from "react-redux"
+
 function Render() {
 
   const showEditor = useSelector(state=>state.editor.showEditor)
@@ -10,8 +10,10 @@ function Render() {
   return (
     <>
       <div className="mb-20">
-      <Avatar></Avatar>
-            {/* <ProfilePage/> */}
+      <Container>
+      <Register/>
+      </Container>
+            
       </div>
     </>
   )

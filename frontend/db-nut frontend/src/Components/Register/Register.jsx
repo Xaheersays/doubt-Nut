@@ -2,9 +2,17 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
+import { useDispatch } from 'react-redux';
+import { DoLogin } from '../../Store/loginSlice';
+
+
 const Register = () => {
+  const dispatch = useDispatch()
+
   const schema = yup.object().shape({
-    username:yup.string().required(),
+    username:yup.string().required('Username is required')
+    .matches(/^[a-z0-9_]+$/, 'Username can only contain lowercase letters, numbers, and underscores')
+    .transform((value) => value.toLowerCase()),
     email:yup.string().email().required(),
     password:yup.string().min(6).max(20).required(),
     confirmPassword:yup.string().oneOf([yup.ref('password'),null]).required()
@@ -19,6 +27,7 @@ const Register = () => {
 
   const onSubmit = (data)=>{
     console.log(data)
+    dispatch(DoLogin(data))
   }
 
   return (

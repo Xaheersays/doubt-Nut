@@ -2,8 +2,8 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
 
-function Login() {
 
+function Login() {
   const schema = yup.object().shape({
     username:yup.string().required(),
     password:yup.string().min(6).max(20).required(),

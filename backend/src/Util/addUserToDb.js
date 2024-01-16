@@ -9,6 +9,7 @@ const addUserToDb = async (userInfo) => {
     userInfo['followers'] = [];
     userInfo['following'] = [];
     userInfo['drafts'] = [];
+    
 
     try {
         const result = await saveToDb(new User(userInfo));
