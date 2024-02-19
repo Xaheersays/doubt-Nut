@@ -1,11 +1,24 @@
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
-
+import { useDispatch,useSelector } from 'react-redux';
+import { DoLogin,Loading,Status } from '../../Store/loginSlice';
+import React,{useState} from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import AlertCustom from '../../Alert'
 
 function Login() {
+  
+  const dispatch = useDispatch()
+  const url = 'http://localhost:3000/user/login'
+  const isLoading = useSelector(Loading);
+  const fetchStatus = useSelector(Status);
+  const [showAlert, setShowAlert] = useState(false)
+
   const schema = yup.object().shape({
-    username:yup.string().required(),
+    username:yup.string().required('Username is required')
+    .matches(/^[a-z0-9_]+$/, 'Username can only contain lowercase letters, numbers, and underscores')
+    .transform((value) => value.toLowerCase()),
     password:yup.string().min(6).max(20).required(),
   })
 
@@ -14,17 +27,42 @@ function Login() {
     resolver :yupResolver(schema)
   });
   
-  
-
   const onSubmit = (data)=>{
-    console.log(data)
+    const obj = {data:data,url:url}
+    dispatch(DoLogin(obj))
+    setShowAlert(true)
+    setTimeout(() => setShowAlert(false), 5000)
   }
 
+  let content;
+  //info is loding 
+  if (fetchStatus === 'info') {
+    content = "Logging in to your  Doubtnut account";
+  } else if (fetchStatus === 'error') {
+    content = "Some Error has been Occurred. Please try again.";
+  } else if (fetchStatus === 'success') {
+    content = "You have successfully logged in.";
+  }
+
+
+  
+
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}  className=" mx-auto mt-8 border">
+    <form onSubmit={handleSubmit(onSubmit)}  className=" mx-auto mt-8 border py-8 px-2">
+      {showAlert && (
+        <div className='flex'>
+            <AlertCustom fetchStatus={fetchStatus} content={content}/>
+        <button className='border rounded-md p-2' onClick={() => setShowAlert(false)}>Dismiss</button>
+        </div>
+      )}
+
       <div className="flex flex-col gap-4 items-center ">
         <p className='bg-slate-600 bg-opacity-50    mt-10
                       backdrop-filter backdrop-blur-md p-5 rounded-md text-center'>LOGIN</p>
+                       <div className='flex justify-center items-center py-2'>
+                        {isLoading && <CircularProgress/>}
+                      </div>
         <div className="flex flex-col  w-9/12 md:w-1/2">
           <label htmlFor="username" className="text-sm mb-1">
           Username

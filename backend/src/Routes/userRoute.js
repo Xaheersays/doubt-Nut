@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {hasToken,validateUserInput,duplicateUser,usernameExists,questionBelongsToUser,questionInDrafts,commentBelongsToUser,questionIdPresent,commentIdPresent} =require('../Middlewears/export')
-const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts, addUpvote, addDownvote,addComment,removeComment,getUserFeed} =require('../Util/export')
+const {addUserToDb,getDocFromToken,jwt,addFollower, removeFollower,getBasicInfo,decodeToken,getDrafts, addUpvote, addDownvote,addComment,removeComment,getUserFeed, getToken} =require('../Util/export')
 const{fetchDocumentFromDb} = require('../Db/export');
 const { User } = require('../Model/userModel');
 const {addQuestion,removeQuestion,getQuestionFromId} = require('../Util/postQuestionUtils/export');
@@ -24,14 +24,28 @@ router.post('/register',validateUserInput,duplicateUser,async(req,res)=>{
     if(!result){
         return res.status(403).json({success:false,message:'user could not saved'})
     }
-    result.token = jwt.sign({username,password,email})
+    result.token = jwt.sign({username,password})
     return res.status(201).json(result)
 })
 
 
-//signin : todo
+//signin : todo TODO:
 
-
+router.post('/login',async(req,res)=>{
+    const {username,password} = req.body
+    const doc =await User.findOne({username,password})
+    if(!doc)return res.send({success:false,message:'bad credentials'})
+    const tokenResult = getToken({username,password})
+    if (!tokenResult.success)return res.send({success:false,message:'cant generate token try again'})
+    // setTimeout(()=>{
+        return res.send({
+            success:true,
+            message:'login successfull',
+            token : tokenResult.token
+        }) 
+    // },4000)
+    
+})
 
 
 //post question 

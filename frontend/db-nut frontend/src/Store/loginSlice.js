@@ -1,32 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// export const DoLogin = createAsyncThunk('DoLogin', async (requestData) => {
-//     const resp = await fetch('http://localhost:3000/user/register', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(requestData)
-//     });
-
-//     const data =  await resp.json();
-//     console.log(data)
-//     if(!data || !data.success){
-//         return new Error(data.message || 'cant fetch man')
-//     }else{
-//         return  data.token
-//     }
-// });
-
-
 export const DoLogin = createAsyncThunk('DoLogin', async (requestData) => {
+
+    const {url,data} = requestData
+    // await new Promise(res=>setTimeout(res,2000))
     try {
-        const resp = await fetch('http://localhost:3000/user/register', {
+        const resp = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(requestData),
+            body: JSON.stringify(data),
         });
 
         if (!resp.ok) {
@@ -37,12 +21,12 @@ export const DoLogin = createAsyncThunk('DoLogin', async (requestData) => {
         const responseData = await resp.json();
 
         if (responseData.success) {
-            return responseData.token; // Assuming you want to store the token in the state
+            return responseData.token;
         } else {
             throw new Error(responseData.message);
         }
     } catch (error) {
-        throw new Error(error.message); // Return a string message instead of the Error object
+        throw new Error(error.message); 
     }
 });
 
@@ -51,7 +35,9 @@ export const DoLogin = createAsyncThunk('DoLogin', async (requestData) => {
 const initialState = {
     isLogin: localStorage.getItem('doubtNutToken') ? true : false,
     errorOccured:false,
-    
+    loading:false,
+    status:"still"
+
 };
 
 export const loginSlice = createSlice({
@@ -62,18 +48,26 @@ export const loginSlice = createSlice({
             localStorage.removeItem('doubtNutToken');
             state.isLogin = false;
         },
+        
     },
     extraReducers: (builder) => {
+        
         builder.addCase(DoLogin.rejected,(state,action)=>{
             state.errorOccured  = true
+            state.loading = false
+            state.status = 'error'
             console.error('Login failed:', action.error.message);
         })
         builder.addCase(DoLogin.pending,(state,action)=>{
+            state.loading= true
+            state.status = 'info'
             console.log('pending')
         })
         builder.addCase(DoLogin.fulfilled, (state, action) => {
             state.errorOccured  = false
             state.isLogin = true;
+            state.loading= false
+            state.status = 'success'
             console.log(action.payload)
             console.log('token fulfilled ')
             localStorage.setItem('doubtNutToken', action.payload);
@@ -82,4 +76,12 @@ export const loginSlice = createSlice({
 });
 
 export const { logout } = loginSlice.actions;
+
+export const Loading = (state)=>state.login.loading;
+export const Errored = (state)=>state.login.errorOccured;
+export const Status = (state)=>state.login.status;
+
+export const LoginState = (state)=>state.login
+
+
 export default loginSlice.reducer;

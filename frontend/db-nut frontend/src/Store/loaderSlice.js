@@ -9,11 +9,15 @@ export const LoaderSlice = createSlice({
   name:'Loader',
   initialState,
   reducers :{
-    toggleLoader : (state)=>{
-        state.isLoading = !state.isLoading
+    startLoader : (state)=>{
+
+        state.isLoading =true
+    },
+    stopLoader  : (state)=>{
+      state.isLoading = false
     }
   }
 })
 
-export  const {toggleLoader} = LoaderSlice.actions;
+export  const {startLoader,stopLoader} = LoaderSlice.actions;
 export default LoaderSlice.reducer
