@@ -2,6 +2,8 @@ import React,{memo} from 'react'
 import { Button } from '../export'
 import { useDispatch,useSelector } from 'react-redux'
 import { hideEditor,displayEditor } from '../../Store/editorSlice'
+import { AiTwotoneCloseCircle } from "react-icons/ai";
+
 const PostQuestion = memo(function PostQuestion() {
   const dispatch = useDispatch()
   const showEditor = useSelector(state=>state.editor.showEditor)
@@ -15,8 +17,12 @@ const PostQuestion = memo(function PostQuestion() {
     }
   }
   return (
-    <div onClick={handleClick} className='my-10  cursor-pointer s'>
-      <Button btnName={'Post Question'}></Button>
+    <div>
+      <div onClick={handleClick} className='my-10  cursor-pointer s'>
+        <Button btnName={'Post Question'}></Button>
+        {showEditor &&  <p className='fixed z-40 right-10 top-20'><AiTwotoneCloseCircle size={30}/></p>}
+      </div>
+      {showEditor && <button className='fixed  right-10 bottom-5 z-50 bg-green-600 p-4 rounded-md'>submit</button>}
     </div>
   )
 })

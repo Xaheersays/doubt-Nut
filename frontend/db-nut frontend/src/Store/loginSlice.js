@@ -37,7 +37,6 @@ const initialState = {
     errorOccured:false,
     loading:false,
     status:"still"
-
 };
 
 export const loginSlice = createSlice({

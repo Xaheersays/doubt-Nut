@@ -7,10 +7,11 @@ function Editor({placeholder}) {
 	const [content, setContent] = useState('');
 	const config = {
 		readonly: false, 
-		height: '450px',
+		height: '400px',
 		toolbarButtonSize: 'large',
 		
-
+		// fullsize: true,
+		// globalFullSize: false,
 		enableDragAndDropFileToEditor: true,
 		uploader: { insertImageAsBase64URI: true },
 		style: {
@@ -20,7 +21,10 @@ function Editor({placeholder}) {
 };
 
 	return (
-		<div className='my-10 text-black' >
+		<div>
+		<div className= {`my-10 text-black fixed z-40 left-10 right-10 top-20
+		  ` } >
+				
 			<JoditEditor
 				ref={editor}
 				value={content}
@@ -29,6 +33,8 @@ function Editor({placeholder}) {
 				onBlur={(newContent) => setContent(newContent)} 
 				onChange={(newContent) => {}}
 				/>
+				
+		</div>
 		</div>
 	);
 }

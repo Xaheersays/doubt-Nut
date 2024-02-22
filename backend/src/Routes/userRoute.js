@@ -242,7 +242,7 @@ router.post('/:username/:questionId/vote',hasToken,usernameExists,questionInDraf
 router.get('/feed',hasToken,async(req,res)=>{
     const token = req.headers.authorization
     const feed = await getUserFeed(token)
-    return res.send(feed)
+    return res.json({success:true,message:"got feed",feed})
 })
 
 

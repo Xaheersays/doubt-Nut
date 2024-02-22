@@ -7,7 +7,7 @@ const Header = memo(function Header() {
     const isLoggedIn = useSelector(state=>state.login.isLogin)
     return (
         <div className='p-4 flex justify-between items-center bg-slate-600 bg-opacity-50 h-24  
-        backdrop-filter backdrop-blur-md  rounded-md text-center'>
+        backdrop-filter backdrop-blur-md  text-center'>
             <Logo className={'md:h-16 md:w-16 h-10 w-10'}/>
             <div className='flex gap-2'>
                 <Button btnName={ isLoggedIn ? 'logout' : 'login'  }></Button>
