@@ -57,11 +57,11 @@ function Feed() {
 
 
 
-const Post = ({post})=>{
+export const Post = ({post})=>{
     const lg = 'https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
     return (
         // <AlignCenter>
-        <div className='flex gap-2  p-2 justify-center'>   
+        <div className={`flex gap-2  p-2 justify-center`}>   
             <div className='cursor-pointer'>
                 <SmallProfile src={logoimg}/>
             </div>
@@ -80,10 +80,10 @@ const Post = ({post})=>{
                 <div className='cursor-pointer'>
                 <CarouselBasicExample sources={post.images || [lg,lg,lg]}/>
                 </div>
-                <div className='flex gap-3 items-center'>
-                    <Upvotes/>
-                    <DownVotes/>
-                    <Comment/>
+                <div className='flex gap-4 items-center'>
+                    <p className='flex'>4<Upvotes/></p>
+                    <p className='flex'>4<DownVotes/></p>
+                    <p className='flex'>4<Comment/></p>
                 </div>
             </div>
 
@@ -98,7 +98,7 @@ const Post = ({post})=>{
 
 import { TECarousel, TECarouselItem } from "tw-elements-react";
 
- function CarouselBasicExample({sources}) {
+export const  CarouselBasicExample = ({sources}) => {
   return (
     <>
       <TECarousel showControls showIndicators ride="carousel">
@@ -130,7 +130,7 @@ import { TECarousel, TECarouselItem } from "tw-elements-react";
 
 
 
-
+  
 
 
 

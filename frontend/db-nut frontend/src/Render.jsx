@@ -1,5 +1,5 @@
 import React,{useEffect} from "react"
-import {Container, Editor, Header,Login,Register,PostQuestion,AlignRight,Helper,AlignCenter,Avatar,Follower,Following,Profile,AskedQuestions,Answered,ProfilePage ,Loader,Feed} from './Components/export'
+import {Container, Editor, Header,Login,Register,PostQuestion,AlignRight,Helper,AlignCenter,Avatar,Follower,Following,Profile,AskedQuestions,Answered,ProfilePage ,Loader,Feed,DisplayQuestion} from './Components/export'
 import { useDispatch, useSelector } from "react-redux"
 import { stopLoader,startLoader } from "./Store/loaderSlice"
 function Render() {
@@ -47,7 +47,8 @@ function Render() {
               <Loader/>
             </AlignCenter>
           </Container> */}
-          <Feed/>
+          {/* <Feed/> */}
+          <DisplayQuestion/>
         </Container>
       </div>
     </>

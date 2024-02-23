@@ -22,9 +22,10 @@ import AskedQuestions from './Profile/AskedQuestions'
 import Answered from "./Profile/Answered";
 import Draft from "./Profile/Draft";
 import ProfilePage from '../Pages/ProfilePage'
-import Feed from "./Feed/Feed";
+import Feed,{Post} from "./Feed/Feed";
 import SmallProfile from "./Helper/SmallProfile";
 import Upvotes from "./Helper/Upvotes";
 import DownVotes from "./Helper/DownVotes";
 import Comment from "./Helper/Comment";
-export {Logo,Container,Button,Header,Avatar,Register,Login,Editor,PostQuestion,AlignRight,Helper,Loader,AlignCenter,ShowPfp,ListPopup,Strip,Follower,Following,Profile,QuestionFrameCard,AskedQuestions,Answered,Draft,ProfilePage,Feed,SmallProfile,Upvotes,DownVotes,Comment}
+import DisplayQuestion from './DisplayQuestion/DisplayQuestion'
+export {Logo,Container,Button,Header,Avatar,Register,Login,Editor,PostQuestion,AlignRight,Helper,Loader,AlignCenter,ShowPfp,ListPopup,Strip,Follower,Following,Profile,QuestionFrameCard,AskedQuestions,Answered,Draft,ProfilePage,Feed,SmallProfile,Upvotes,DownVotes,Comment,Post,DisplayQuestion}
