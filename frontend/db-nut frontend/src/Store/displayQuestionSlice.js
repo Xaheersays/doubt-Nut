@@ -1,16 +1,15 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {createAsyncThunk,createSlice } from '@reduxjs/toolkit'
 
-export const fetchFeedAsync = createAsyncThunk('fetchFeedAsync',async(requestData)=>{
-  const {url,data} = requestData
-  // await new Promise((res)=>setTimeout(res,2000))
+
+export const getQuestionAsync = createAsyncThunk('getQuestion',async(requestDate)=>{
+  const {url} = requestDate
   try{
     const resp = await fetch(url,{
       method:'GET',
       headers:{
         'Content-Type': 'application/json',
           authorization:localStorage.getItem('doubtNutToken')
-      },
-      body: JSON.stringify(data),
+      }
     })
     if (!resp.ok) {
       const errorData = await resp.json();
@@ -19,7 +18,7 @@ export const fetchFeedAsync = createAsyncThunk('fetchFeedAsync',async(requestDat
         const responseData = await resp.json();
         if (responseData.success) {
             console.log(responseData)
-            return responseData.feed;
+            return responseData;
         } else {
             throw new Error(responseData.message);
         }
@@ -28,43 +27,42 @@ export const fetchFeedAsync = createAsyncThunk('fetchFeedAsync',async(requestDat
   }
 })
 
+
 const initialState = {
-  feed:[],
+  question:{},
   errored:false,
   isLoading:false,
   status:"still"
-
 }
 
-export const feedSlice = createSlice({
-  name:"feed",
+export const displayQuestionSlice = createSlice({
+  name:"displayQuestion",
   initialState,
   extraReducers:(builder)=>{
-    builder.addCase(fetchFeedAsync.rejected,(state,action)=>{
+    builder.addCase(getQuestionAsync.rejected,(state,action)=>{
       state.errored = true;
       state.isLoading=false;
       state.status = "error"
     })
-    builder.addCase(fetchFeedAsync.pending,(state,action)=>{
+    builder.addCase(getQuestionAsync.pending,(state,action)=>{
       state.isLoading = true
       state.errored=false
       state.status = "info"
     })
-    builder.addCase(fetchFeedAsync.fulfilled,(state,action)=>{
+    builder.addCase(getQuestionAsync.fulfilled,(state,action)=>{
       state.errored=false
       state.isLoading=false
       state.status = "success"
       console.log("actn",action.payload)
-      state.feed = action.payload
+      state.question = action.payload
     })
   }
-
 })
 
 
-export default feedSlice.reducer
 
-export const fetchFeedLoading = (state)=>state.feed.isLoading;
-export const fetchFeedErrored = (state)=>state.feed.errored;
-export const fetchFeedData = (state)=>state.feed.feed;
-export const feedStatus = (state)=>state.feed.status;
+export const questionStatus = (state)=>state.question.status
+export const questionLoading  = (state)=>state.question.isLoading
+export const questionObj = (state)=>state.question.question
+
+export default displayQuestionSlice.reducer;

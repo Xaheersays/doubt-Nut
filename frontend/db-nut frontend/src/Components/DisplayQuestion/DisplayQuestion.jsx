@@ -1,20 +1,50 @@
 import React from 'react'
-// import {Post} from '../export'
 import {SmallProfile,DownVotes,Upvotes,Comment, Container, AlignCenter} from '../export'
 import logoimg from '../../assets/logo.png'
 import { PiDotsThreeCircleDuotone } from "react-icons/pi";
-import {CarouselBasicExample, Post} from '../Feed/Feed'
-
-
+import {CarouselBasicExample} from '../Feed/Feed'
+import { questionStatus,questionLoading,questionObj } from '../../Store/displayQuestionSlice';
+import {useDispatch,useSelector} from "react-redux"
+const q = {
+  "_id": "659ed494d64db64b3d0fd087",
+  "title": "Q1",
+  "content": "Desc1",
+  "status": "active",
+  "images": [
+      "i1",
+      "i2",
+      "i3"
+  ],
+  "tags": [
+      "t1",
+      "t2",
+      "t3",
+      "t4"
+  ],
+  "upvotes": [],
+  "downvotes": [],
+  "replies": [],
+  "createdAt": "2024-01-10T17:32:04.236Z",
+  "authorId": "659a3f9c20480c1d9a0ef579",
+  "updatedAt": "2024-01-10T17:32:04.236Z",
+  "__v": 0
+}
 
  
-function DisplayQuestion({title,avatar,upvotes,downvotes,username,images,firstName,lastName,qid}) {
+function DisplayQuestion({qid}) {
+ 
+  //TODO:need to dispatch the async thunk func from feed
+
+  const dispatch = useDispatch()
+  const status = useSelector(questionStatus)
+  const loading = useSelector(questionLoading)
+  const question = useSelector(questionObj)
+
   return (
     <Container>
       <AlignCenter>
         <div className=' px-4'>
           <Question post={{}}/>
-          
         </div>
       </AlignCenter>
     </Container>

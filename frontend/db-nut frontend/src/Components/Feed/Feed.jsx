@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react'
+import React,{useRef,useState,useEffect} from 'react'
 import { fetchFeedErrored,fetchFeedData,fetchFeedLoading, feedStatus ,fetchFeedAsync} from '../../Store/feedSlice'
 import {useSelector , useDispatch} from 'react-redux'
-import { Loader,Container,AlignCenter,SmallProfile, Upvotes,DownVotes,Comment,QuestionFrameCard } from '../export';
+import { Loader,Container,AlignCenter,SmallProfile, Upvotes,DownVotes,Comment,QuestionFrameCard, Editor } from '../export';
 import PostSkeleton from '../Skeleton/Post.skeleton'
 import logoimg from '../../assets/logo.png'
 import { PiDotsThreeCircleDuotone } from "react-icons/pi";
+import { AiTwotoneCloseCircle } from "react-icons/ai";
+import { IoIosSend } from "react-icons/io";
+
 
 function Feed() {
 
@@ -16,9 +19,6 @@ function Feed() {
     
     useEffect(()=>{
         reloadFeed()
-        // setInterval(()=>{
-        //     reloadFeed()
-        // },4000)
     },[])
 
     const reloadFeed = ()=>{
@@ -41,13 +41,13 @@ function Feed() {
                 </div>}
             </AlignCenter>
             
-            {feed.map((post)=>(
+            {/* {feed.map((post)=>(
                 <div key={post.id}>
                     id :{post.id}
                     title: {post.title}
                     content:{post.content}
                 </div>
-            ))}
+            ))} */}
                 
         </AlignCenter>
         </Container>
@@ -58,6 +58,18 @@ function Feed() {
 
 
 export const Post = ({post})=>{
+    const [showReplyEditor,setShowReplyEditor] = useState(false)
+    const handleDisplayQuestion = (id)=>{
+        console.log(id)
+        //TODO: navigate to other page and displayQuestion
+    }
+
+    const replyToQuestion =(qid)=>{
+        console.log("replying")
+        setShowReplyEditor(true)
+    }
+
+    
     const lg = 'https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
     return (
         // <AlignCenter>
@@ -68,7 +80,7 @@ export const Post = ({post})=>{
             <div className='border w-1/2 flex flex-col gap-4 p-2   bg-slate-700 bg-opacity-50 
                     backdrop-filter backdrop-blur-md  rounded-md px-6'>
                 <div>
-                    <div className='font-semibold'>
+                    <div className='font-semibold '>
                         <div className='flex justify-between  items-center'>
                         <p>{post.firstName}{post.lastName}zaheer shaikh</p> 
                         <p className='cursor-pointer'>< PiDotsThreeCircleDuotone size={20}/></p>
@@ -76,14 +88,31 @@ export const Post = ({post})=>{
                     </div>
                     <p className='text-gray-500 cursor-pointer'>{post.username}@xaheersays</p>
                 </div>
-                <div className='font-x cursor-pointer'>{post.content} Lorem ipsum dolor sit amet consectetur adipisicing elit. A optio cumque, asperiores corporis, accusantium dicta nemo exercitationem repellat obcaecati saepe accusamus cum harum cupiditate facilis neque et, molestias similique. Fugit, maxime ipsam!</div>
-                <div className='cursor-pointer'>
+                <div
+                onClick={()=>{handleDisplayQuestion(post.id)}}
+                 className='font-x cursor-pointer '>{post.content} Lorem ipsum dolor sit amet consectetur adipisicing elit. A optio cumque, asperiores corporis, accusantium dicta nemo exercitationem repellat obcaecati saepe accusamus cum harum cupiditate facilis neque et, molestias similique. Fugit, maxime ipsam!</div>
+                <div
+                onClick={()=>{handleDisplayQuestion(post.id)}}
+                 className='cursor-pointer '>
                 <CarouselBasicExample sources={post.images || [lg,lg,lg]}/>
                 </div>
                 <div className='flex gap-4 items-center'>
                     <p className='flex'>4<Upvotes/></p>
                     <p className='flex'>4<DownVotes/></p>
-                    <p className='flex'>4<Comment/></p>
+                    <p 
+                    onClick={()=>{replyToQuestion(post.id)}}
+                     className='flex '>4<Comment/></p>
+                </div>
+                <div>
+                    {showReplyEditor && <div className='flex flex-col gap-4'>
+                            {/* <p>Reply</p> */}
+                            <p className='self-end ml-auto flex gap-3'>
+                                <p className='cursor-pointer' onClick={()=>{}}><IoIosSend size={25}/></p>
+                                <p className='cursor-pointer' onClick={()=>{setShowReplyEditor((p)=>!p)}}><AiTwotoneCloseCircle size={25}/></p>
+                                </p>
+                            <ReplyEditor/>
+                            
+                        </div>}
                 </div>
             </div>
 
@@ -128,6 +157,48 @@ export const  CarouselBasicExample = ({sources}) => {
   );
 }
 
+
+
+
+
+import JoditEditor from 'jodit-react';
+
+function ReplyEditor() {
+  
+  const editor = useRef(null);
+	const [content, setContent] = useState('');
+	const config = {
+		readonly: false, 
+		height: '400px',
+		toolbarButtonSize: 'large',
+		
+		
+		enableDragAndDropFileToEditor: true,
+		uploader: { insertImageAsBase64URI: true },
+		style: {
+				background: '#0f172a',
+				color: '#FFFFFF',
+		},
+};
+
+	return (
+		<div>
+		<div className= {` text-black  
+		  ` } >
+				
+			<JoditEditor
+				ref={editor}
+				value={content}
+				config={config}
+				tabIndex={4} // tabIndex of textarea
+				onBlur={(newContent) => setContent(newContent)} 
+				onChange={(newContent) => {}}
+				/>
+				
+		</div>
+		</div>
+	);
+}
 
 
   

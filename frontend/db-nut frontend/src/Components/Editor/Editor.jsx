@@ -22,7 +22,7 @@ function Editor({placeholder}) {
 
 	return (
 		<div>
-		<div className= {`my-10 text-black fixed z-40 left-10 right-10 top-20
+		<div className= {`my-10 text-black fixed z-40 left-10 right-10 top-20 
 		  ` } >
 				
 			<JoditEditor

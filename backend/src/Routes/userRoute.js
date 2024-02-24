@@ -95,9 +95,7 @@ router.get('/question/drafts/:questionId',hasToken,questionBelongsToUser,async(r
 router.get('/question/:questionId',questionInDrafts,async(req,res)=>{
     const qid =req.params.questionId
     const qDoc = await getQuestionFromId(qid)
-    return res.send(qDoc)
-    
-
+    return res.status(200).json({success:true,message:"fetched question", question : qDoc})
 })
 
 
@@ -189,7 +187,7 @@ router.post('/:questionId/answer',hasToken,questionIdPresent,async(req,res)=>{
         title,content,images,tags,
     }
     const result = await addComment(answer,qid,token,'answer')
-    return res.send(result)
+    return res.json({ success:true, message:"posted answer successfully",result})
 })
 
 //commenting

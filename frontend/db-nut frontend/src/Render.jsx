@@ -41,14 +41,14 @@ function Render() {
           </Helper>}
           {/* <Register/> */}
           {/* <Login></Login> */}
-          {showEditor && <Editor placeholder={"yooo"}></Editor>}
+          {showEditor && <Editor className={''} placeholder={"yooo"}></Editor>}
           {/* <Container>
             <AlignCenter>
               <Loader/>
             </AlignCenter>
           </Container> */}
-          {/* <Feed/> */}
-          <DisplayQuestion/>
+          <Feed/>
+          {/* <DisplayQuestion/> */}
         </Container>
       </div>
     </>
