@@ -28,4 +28,5 @@ import Upvotes from "./Helper/Upvotes";
 import DownVotes from "./Helper/DownVotes";
 import Comment from "./Helper/Comment";
 import DisplayQuestion from './DisplayQuestion/DisplayQuestion'
-export {Logo,Container,Button,Header,Avatar,Register,Login,Editor,PostQuestion,AlignRight,Helper,Loader,AlignCenter,ShowPfp,ListPopup,Strip,Follower,Following,Profile,QuestionFrameCard,AskedQuestions,Answered,Draft,ProfilePage,Feed,SmallProfile,Upvotes,DownVotes,Comment,Post,DisplayQuestion}
+import Report from "./Report/Report";
+export {Logo,Container,Button,Header,Avatar,Register,Login,Editor,PostQuestion,AlignRight,Helper,Loader,AlignCenter,ShowPfp,ListPopup,Strip,Follower,Following,Profile,QuestionFrameCard,AskedQuestions,Answered,Draft,ProfilePage,Feed,SmallProfile,Upvotes,DownVotes,Comment,Post,DisplayQuestion,Report}

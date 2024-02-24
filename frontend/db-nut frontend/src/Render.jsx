@@ -48,7 +48,7 @@ function Render() {
             </AlignCenter>
           </Container> */}
           <Feed/>
-          {/* <DisplayQuestion/> */}
+          <DisplayQuestion/>
         </Container>
       </div>
     </>

@@ -1,12 +1,13 @@
 import React,{useRef,useState,useEffect} from 'react'
 import { fetchFeedErrored,fetchFeedData,fetchFeedLoading, feedStatus ,fetchFeedAsync} from '../../Store/feedSlice'
 import {useSelector , useDispatch} from 'react-redux'
-import { Loader,Container,AlignCenter,SmallProfile, Upvotes,DownVotes,Comment,QuestionFrameCard, Editor } from '../export';
+import { Loader,Container,AlignCenter,SmallProfile, Upvotes,DownVotes,Comment,QuestionFrameCard, Editor, Report } from '../export';
 import PostSkeleton from '../Skeleton/Post.skeleton'
 import logoimg from '../../assets/logo.png'
 import { PiDotsThreeCircleDuotone } from "react-icons/pi";
 import { AiTwotoneCloseCircle } from "react-icons/ai";
 import { IoIosSend } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 
 
 function Feed() {
@@ -14,7 +15,7 @@ function Feed() {
     const dispatch = useDispatch()
     const feed = useSelector(fetchFeedData) || []
     const isLoading = useSelector(fetchFeedLoading)
-
+    
 
     
     useEffect(()=>{
@@ -59,6 +60,22 @@ function Feed() {
 
 export const Post = ({post})=>{
     const [showReplyEditor,setShowReplyEditor] = useState(false)
+    const [report,setReport] = useState(false)
+
+    useEffect(() => {
+        const handleEscapeKey = (event) => {
+          if (event.key === 'Escape' && report) {
+            setReport(false)
+          }
+        };
+    
+        document.addEventListener('keydown', handleEscapeKey);
+    
+        return () => {
+          document.removeEventListener('keydown', handleEscapeKey);
+        };
+      }, [report]);
+
     const handleDisplayQuestion = (id)=>{
         console.log(id)
         //TODO: navigate to other page and displayQuestion
@@ -66,9 +83,14 @@ export const Post = ({post})=>{
 
     const replyToQuestion =(qid)=>{
         console.log("replying")
-        setShowReplyEditor(true)
+        setShowReplyEditor((p)=>!p)
     }
 
+    
+
+    const sendReply = (qid,answer)=>{
+
+    }
     
     const lg = 'https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
     return (
@@ -81,9 +103,16 @@ export const Post = ({post})=>{
                     backdrop-filter backdrop-blur-md  rounded-md px-6'>
                 <div>
                     <div className='font-semibold '>
-                        <div className='flex justify-between  items-center'>
-                        <p>{post.firstName}{post.lastName}zaheer shaikh</p> 
-                        <p className='cursor-pointer'>< PiDotsThreeCircleDuotone size={20}/></p>
+                        <div className='flex justify-between  items-center '>
+                            <p>{post.firstName}{post.lastName}zaheer shaikh</p> 
+                            <div>
+                                <p 
+                                onClick={ ()=>setReport(p=>!p) }
+                                className='cursor-pointer  hover:scale-110 transition duration-300 ease-in-out'> {report ? <IoClose size={20}/> :< PiDotsThreeCircleDuotone size={20}/>}</p>
+                                <div>
+                                    {report && <div className='absolute z-50 right-1'><Report/></div>}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <p className='text-gray-500 cursor-pointer'>{post.username}@xaheersays</p>
@@ -106,8 +135,9 @@ export const Post = ({post})=>{
                 <div>
                     {showReplyEditor && <div className='flex flex-col gap-4'>
                             {/* <p>Reply</p> */}
-                            <p className='self-end ml-auto flex gap-3'>
-                                <p className='cursor-pointer' onClick={()=>{}}><IoIosSend size={25}/></p>
+                            <p className='self-end ml-auto flex gap-3'> 
+                            {/* TODO:answer obj {} */}
+                                <p className='cursor-pointer' onClick={()=>{sendReply(post.id,{})}}><IoIosSend size={25}/></p>
                                 <p className='cursor-pointer' onClick={()=>{setShowReplyEditor((p)=>!p)}}><AiTwotoneCloseCircle size={25}/></p>
                                 </p>
                             <ReplyEditor/>
@@ -169,7 +199,7 @@ function ReplyEditor() {
 	const [content, setContent] = useState('');
 	const config = {
 		readonly: false, 
-		height: '400px',
+		// height: '400px',
 		toolbarButtonSize: 'large',
 		
 		
@@ -203,7 +233,7 @@ function ReplyEditor() {
 
   
 
-
+ export {ReplyEditor}
 
 
 export default Feed
