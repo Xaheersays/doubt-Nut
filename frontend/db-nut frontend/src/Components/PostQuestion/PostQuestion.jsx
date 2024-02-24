@@ -1,4 +1,4 @@
-import React,{memo} from 'react'
+import React,{memo,useEffect} from 'react'
 import { Button } from '../export'
 import { useDispatch,useSelector } from 'react-redux'
 import { hideEditor,displayEditor } from '../../Store/editorSlice'
@@ -16,6 +16,22 @@ const PostQuestion = memo(function PostQuestion() {
       dispatch(displayEditor())
     }
   }
+
+  useEffect(() => {
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape' && showEditor) {
+        handleClick()
+      }
+    };
+
+    document.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [showEditor]);
+
+
   return (
     <div>
       <div onClick={handleClick} className='my-10  cursor-pointer s'>
