@@ -1,5 +1,5 @@
 import React ,{useState,useEffect}from 'react'
-import {SmallProfile,DownVotes,Upvotes,Comment, Container, AlignCenter,Report} from '../export'
+import {SmallProfile,DownVotes,Upvotes,Comment,Tags, Container, AlignCenter,Report} from '../export'
 import logoimg from '../../assets/logo.png'
 import { PiDotsThreeCircleDuotone } from "react-icons/pi";
 import {CarouselBasicExample} from '../Feed/Feed'
@@ -119,6 +119,7 @@ const Question = ({post})=>{
               <p className='flex gap-1'>4<DownVotes/></p>
               <p  className='flex gap-1' onClick={()=>{setShowReplyEditor((p)=>!p)}}>4<Comment/></p>
             </div>
+            <div><Tags tags={["t1","t1","t1","t1","t1","t1",]}/></div>
             <div>
                 {showReplyEditor && <div className='flex flex-col gap-4'>
                         <p className='self-end ml-auto flex gap-3'> 

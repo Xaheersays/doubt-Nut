@@ -20,9 +20,9 @@ const PostQuestion = memo(function PostQuestion() {
     <div>
       <div onClick={handleClick} className='my-10  cursor-pointer s'>
         <Button btnName={'Post Question'}></Button>
-        {showEditor &&  <p className='fixed z-40 right-10 top-20'><AiTwotoneCloseCircle size={30}/></p>}
+        {showEditor &&  <p className='fixed z-40 right-10 top-20  hover:scale-110 transition duration-300 ease-in-out'><AiTwotoneCloseCircle size={30}/></p>}
       </div>
-      {showEditor && <button className='fixed  right-10 bottom-5 z-50 bg-green-600 p-4 rounded-md'>submit</button>}
+      {showEditor && <button className='fixed  right-10 bottom-5 z-50 bg-green-600 p-4 rounded-md  hover:scale-110 transition duration-300 ease-in-out hover:bg-green-800'>submit</button>}
     </div>
   )
 })

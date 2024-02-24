@@ -1,7 +1,7 @@
 import React,{useRef,useState,useEffect} from 'react'
 import { fetchFeedErrored,fetchFeedData,fetchFeedLoading, feedStatus ,fetchFeedAsync} from '../../Store/feedSlice'
 import {useSelector , useDispatch} from 'react-redux'
-import { Loader,Container,AlignCenter,SmallProfile, Upvotes,DownVotes,Comment,QuestionFrameCard, Editor, Report } from '../export';
+import { Loader,Container,AlignCenter,Tags,SmallProfile, Upvotes,DownVotes,Comment,QuestionFrameCard, Editor, Report } from '../export';
 import PostSkeleton from '../Skeleton/Post.skeleton'
 import logoimg from '../../assets/logo.png'
 import { PiDotsThreeCircleDuotone } from "react-icons/pi";
@@ -125,6 +125,7 @@ export const Post = ({post})=>{
                  className='cursor-pointer '>
                 <CarouselBasicExample sources={post.images || [lg,lg,lg]}/>
                 </div>
+                <div><Tags tags={["t1","t1","t1","t1","t1","t1",]}/></div>
                 <div className='flex gap-4 items-center'>
                     <p className='flex'>4<Upvotes/></p>
                     <p className='flex'>4<DownVotes/></p>
@@ -192,6 +193,7 @@ export const  CarouselBasicExample = ({sources}) => {
 
 
 import JoditEditor from 'jodit-react';
+
 
 function ReplyEditor() {
   
