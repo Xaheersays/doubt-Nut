@@ -47,9 +47,10 @@ function Render() {
               <Loader/>
             </AlignCenter>
           </Container> */}
-          <Feed/>
-          <DisplayQuestion/>
-          
+          {/* <Feed/> */}
+          {/* <DisplayQuestion/> */}
+          <Profile/>
+          <Follower/>
         </Container>
       </div>
     </>

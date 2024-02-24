@@ -11,16 +11,20 @@ export const PopupSlice = createSlice({
   initialState,
   reducers :{
     toggleFWPopup : (state)=>{
+      state.showFWPopup = !state.showFWPopup
       state.showFGPopup = false
-        state.showFWPopup = !state.showFWPopup
     },
     toggleFGPopup:(state)=>{
-      state.showFWPopup = false
       state.showFGPopup = !state.showFGPopup
-      
+      state.showFWPopup=false
     }
   }
 })
 
 export  const {toggleFGPopup,toggleFWPopup} = PopupSlice.actions;
+
+export const showFollowers = (state)=>state.popup.showFWPopup
+export const showFollowing = (state)=>state.popup.showFGPopup
+
+
 export default PopupSlice.reducer

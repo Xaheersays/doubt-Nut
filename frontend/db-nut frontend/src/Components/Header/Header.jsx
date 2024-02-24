@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Logo, Button } from '../export';
 
 const Header = memo(function Header() {
-  console.log(localStorage.getItem('doubtNutToken'));
+  
   const isLoggedIn = useSelector(state => state.login.isLogin);
   const [showButtons, setShowButtons] = useState(false);
 

@@ -2,6 +2,7 @@ import React,{memo} from 'react';
 import { Card } from 'flowbite-react';
 import { BiSolidUpvote } from "react-icons/bi";
 import { BiSolidDownvote } from "react-icons/bi";
+import { DownVotes, Upvotes } from '../export';
 
 
 
@@ -16,8 +17,8 @@ function QuestionFrameCard({title,upvotes,downvotes,ct,content}) {
           <p className='font-normal'>{content}</p>
           <div>
             <div className='  flex  gap-3 justify-around my-3'>
-              <p className=' flex items-center '> <BiSolidUpvote color={'orange'} size={20}/> : {upvotes}</p>
-              <p className=' flex items-center '> <BiSolidDownvote color={'blue'} size={20}/> : {downvotes}</p>
+              <p className=' flex items-center '> <Upvotes color={'orange'} size={20}/>  {upvotes}</p>
+              <p className=' flex items-center '> <DownVotes color={'blue'} size={20}/>  {downvotes}</p>
             </div>
             <div>
               <p className='text-xs font-semibold
