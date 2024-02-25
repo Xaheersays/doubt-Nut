@@ -1,7 +1,8 @@
 import React, { useState,memo } from 'react';
 import { Avatar, AskedQuestions,Answered,Draft } from '../export'; // Import components for each tab
 
-function Profile() {
+function Profile({username}) {
+  //TODO: fetch user from username
   const [activeTab, setActiveTab] = useState('posts');
 
   const handleTabClick = (tab) => {

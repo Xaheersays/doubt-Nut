@@ -2,6 +2,7 @@ import React from 'react';
 import { AlignRight, Strip } from '../export';
 import {  useDispatch } from 'react-redux';
 
+//TODO:profile on click from list 
 
 function ListPopup({ data, title,dispatchFunction }) {
   

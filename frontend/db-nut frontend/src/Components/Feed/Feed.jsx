@@ -8,7 +8,7 @@ import { PiDotsThreeCircleDuotone } from "react-icons/pi";
 import { AiTwotoneCloseCircle } from "react-icons/ai";
 import { IoIosSend } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
-
+import {useNavigate} from 'react-router-dom'
 
 function Feed() {
 
@@ -59,6 +59,7 @@ function Feed() {
 
 
 export const Post = ({post})=>{
+    const navigate = useNavigate()
     const [showReplyEditor,setShowReplyEditor] = useState(false)
     const [report,setReport] = useState(false)
 
@@ -68,17 +69,22 @@ export const Post = ({post})=>{
             setReport(false)
           }
         };
-    
+        
+        
+
         document.addEventListener('keydown', handleEscapeKey);
-    
         return () => {
           document.removeEventListener('keydown', handleEscapeKey);
         };
       }, [report]);
 
-    const handleDisplayQuestion = (id)=>{
-        console.log(id)
+    const handleDisplayQuestion = (qid)=>{
+        navigate('/question/'+qid)
         //TODO: navigate to other page and displayQuestion
+    }
+
+    const handleProfileClick = (username)=>{
+        navigate('profile/'+username)
     }
 
     const replyToQuestion =(qid)=>{
@@ -96,7 +102,9 @@ export const Post = ({post})=>{
     return (
         // <AlignCenter>
         <div className={`flex gap-2  p-2 justify-center`}>   
-            <div className='cursor-pointer'>
+            <div 
+            onClick={()=>{handleProfileClick(post.username)}}
+            className='cursor-pointer'>
                 <SmallProfile src={logoimg}/>
             </div>
             <div className='border w-1/2 flex flex-col gap-4 p-2   bg-slate-700 bg-opacity-50 
@@ -104,18 +112,18 @@ export const Post = ({post})=>{
                 <div>
                     <div className='font-semibold '>
                         <div className='flex justify-between  items-center '>
-                            <p>{post.firstName}{post.lastName}zaheer shaikh</p> 
+                            <p  className='cursor-pointer' onClick={()=>navigate('profile/' +post.username)}>{post.firstName}{post.lastName}zaheer shaikh</p> 
                             <div>
                                 <p 
                                 onClick={ ()=>setReport(p=>!p) }
                                 className='cursor-pointer  hover:scale-110 transition duration-300 ease-in-out'> {report ? <IoClose size={20}/> :< PiDotsThreeCircleDuotone size={20}/>}</p>
-                                <div>
+                                <div  id='report'>
                                     {report && <div className='absolute z-50 right-1 '><Report/></div>}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <p className='text-gray-500 cursor-pointer'>{post.username}@xaheersays</p>
+                    <p  onClick={()=>navigate('profile/' +post.username)} className='text-gray-500 cursor-pointer'>{post.username}@xaheersays</p>
                 </div>
                 <div
                 onClick={()=>{handleDisplayQuestion(post.id)}}

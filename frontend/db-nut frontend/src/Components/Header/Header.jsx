@@ -1,9 +1,10 @@
 import React, { memo, useState ,useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { Logo, Button } from '../export';
+import { useNavigate } from "react-router-dom";
 
 const Header = memo(function Header() {
-  
+  const navigate = useNavigate()
   const isLoggedIn = useSelector(state => state.login.isLogin);
   const [showButtons, setShowButtons] = useState(false);
 
@@ -14,11 +15,20 @@ const Header = memo(function Header() {
         setShowButtons(false)
       }
     };
+    const handleClickOutside = (event) => {
+      const dropdown = document.getElementById('click-dropdown'); 
+      const drop = document.getElementById('drop-down')
+      if (dropdown && !dropdown.contains(event.target) && !drop.contains(event.target)) {
+        setShowButtons(false);
+      }
+    };
 
     document.addEventListener('keydown', handleEscapeKey);
-
+    document.addEventListener('click',handleClickOutside)
     return () => {
       document.removeEventListener('keydown', handleEscapeKey);
+      document.addEventListener('click',handleClickOutside)
+
     };
   }, [showButtons]);
 
@@ -33,19 +43,39 @@ const Header = memo(function Header() {
       <div className='flex gap-2'>
         <div>
           <div className='relative'>
-            <div
+            <div id="click-dropdown"
               className='flex justify-center items-center p-2 rounded-full h-10 w-10 bg-gray-500 cursor-pointer'
               onClick={handleProfileClick}
             >
               <p>Z</p>
             </div>
             {showButtons && ( 
-              <div className='absolute top-full right-1 my-2 bg-slate-300 shadow-lg rounded p-4 h-auto  '>
+              <div id="drop-down" className='absolute top-full right-1 my-2 bg-slate-300 shadow-lg rounded p-4 h-auto  '>
                 {!isLoggedIn  ? 
-                <p className='  hover:scale-110 transition duration-300 ease-in-out'><BeautyFulBtn text='Login'/></p>
+                <p onClick={()=>{
+                  setShowButtons(false)
+                  navigate('/login')
+                }}
+                className='  hover:scale-110 transition duration-300 ease-in-out'><BeautyFulBtn text='Login'/></p>
                 :
-                <p className='  hover:scale-110 transition duration-300 ease-in-out'><BeautyFulBtn text='Logout'/></p>}
-                <p className='  hover:scale-110 transition duration-300 ease-in-out'><BeautyFulBtn text='Register'/></p>
+                <div>
+                  <p 
+                  onClick={()=>{
+                    setShowButtons(false)
+                    navigate("/profile")}
+                  }
+                  className='  hover:scale-110 transition duration-300 ease-in-out'><BeautyFulBtn text=' Profile'/></p>
+                  <p className='  hover:scale-110 transition duration-300 ease-in-out'><BeautyFulBtn text='Logout'/></p>
+
+                </div>
+                }
+                
+                <p 
+                onClick={()=>{
+                  setShowButtons(false)
+                  navigate('/register')}
+                }
+                className='  hover:scale-110 transition duration-300 ease-in-out'><BeautyFulBtn text='Register'/></p>
               </div>
             )}
           </div>
