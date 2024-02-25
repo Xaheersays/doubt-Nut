@@ -30,4 +30,5 @@ import Comment from "./Helper/Comment";
 import DisplayQuestion from './DisplayQuestion/DisplayQuestion'
 import Report from "./Report/Report";
 import Tags from "./Tags/Tags";
-export {Logo,Container,Button,Header,Avatar,Register,Login,Editor,PostQuestion,AlignRight,Helper,Loader,AlignCenter,ShowPfp,ListPopup,Strip,Follower,Following,Profile,QuestionFrameCard,AskedQuestions,Answered,Draft,ProfilePage,Feed,SmallProfile,Upvotes,DownVotes,Comment,Post,DisplayQuestion,Report,Tags}
+import Search from "./Search/Search";
+export {Logo,Container,Button,Header,Avatar,Register,Login,Editor,PostQuestion,AlignRight,Helper,Loader,AlignCenter,ShowPfp,ListPopup,Strip,Follower,Following,Profile,QuestionFrameCard,AskedQuestions,Answered,Draft,ProfilePage,Feed,SmallProfile,Upvotes,DownVotes,Comment,Post,DisplayQuestion,Report,Tags,Search}

@@ -11,7 +11,7 @@ function Profile() {
   };
 
   return (
-    <div className='border'>
+    <div className='border px-4 py-2'>
       <Avatar />
       
       <div className='flex justify-center gap-4 '>

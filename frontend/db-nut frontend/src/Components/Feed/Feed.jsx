@@ -110,7 +110,7 @@ export const Post = ({post})=>{
                                 onClick={ ()=>setReport(p=>!p) }
                                 className='cursor-pointer  hover:scale-110 transition duration-300 ease-in-out'> {report ? <IoClose size={20}/> :< PiDotsThreeCircleDuotone size={20}/>}</p>
                                 <div>
-                                    {report && <div className='absolute z-50 right-1'><Report/></div>}
+                                    {report && <div className='absolute z-50 right-1 '><Report/></div>}
                                 </div>
                             </div>
                         </div>

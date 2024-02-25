@@ -41,7 +41,10 @@ const Header = memo(function Header() {
             </div>
             {showButtons && ( 
               <div className='absolute top-full right-1 my-2 bg-slate-300 shadow-lg rounded p-4 h-auto  '>
+                {!isLoggedIn  ? 
                 <p className='  hover:scale-110 transition duration-300 ease-in-out'><BeautyFulBtn text='Login'/></p>
+                :
+                <p className='  hover:scale-110 transition duration-300 ease-in-out'><BeautyFulBtn text='Logout'/></p>}
                 <p className='  hover:scale-110 transition duration-300 ease-in-out'><BeautyFulBtn text='Register'/></p>
               </div>
             )}
