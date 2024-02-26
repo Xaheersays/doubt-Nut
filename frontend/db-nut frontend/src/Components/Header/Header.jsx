@@ -38,9 +38,9 @@ const Header = memo(function Header() {
   };
 
   return (
-    <div className='p-4 flex justify-between items-center bg-slate-600 bg-opacity-50 h-24 backdrop-filter backdrop-blur-md text-center'>
+    <div className='z-[2000] p-4 flex justify-between items-center bg-slate-600 bg-opacity-50 h-24 backdrop-filter backdrop-blur-md text-center relative'>
       <Logo className={'md:h-16 md:w-16 h-10 w-10'} />
-      <div className='flex gap-2'>
+      <div className='flex gap-2 relative'>
         <div>
           <div className='relative'>
             <div id="click-dropdown"
@@ -50,7 +50,7 @@ const Header = memo(function Header() {
               <p>Z</p>
             </div>
             {showButtons && ( 
-              <div id="drop-down" className='absolute top-full right-1 my-2 bg-slate-300 shadow-lg rounded p-4 h-auto  '>
+              <div id="drop-down"   className='z-[100000000000] absolute top-full right-1 my-2 bg-slate-300 shadow-lg rounded p-4 h-auto  '>
                 {!isLoggedIn  ? 
                 <p onClick={()=>{
                   setShowButtons(false)

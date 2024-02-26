@@ -32,26 +32,15 @@ function Feed() {
   return (
 
     <div>
-        <Container>
+        {/* <Container> */}
         <AlignCenter>
-        {isLoading && <PostSkeleton/>}
-            <AlignCenter>
-               {!isLoading && <div>
+            {isLoading && <PostSkeleton/>}
+        </AlignCenter>
+        {!isLoading && <div>
                 <Post post={{}}/>
                 <Post post={{}}/><Post post={{}}/><Post post={{}}/><Post post={{}}/><Post post={{}}/><Post post={{}}/><Post post={{}}/>
                 </div>}
-            </AlignCenter>
-            
-            {/* {feed.map((post)=>(
-                <div key={post.id}>
-                    id :{post.id}
-                    title: {post.title}
-                    content:{post.content}
-                </div>
-            ))} */}
-                
-        </AlignCenter>
-        </Container>
+        
     </div>
   )
 }
@@ -101,13 +90,12 @@ export const Post = ({post})=>{
     const lg = 'https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
     return (
         // <AlignCenter>
-        <div className={`flex gap-2  p-2 justify-center`}>   
+        <div className={` flex gap-2  p-2 justify-center `}>   
             <div 
-            onClick={()=>{handleProfileClick(post.username)}}
-            className='cursor-pointer'>
-                <SmallProfile src={logoimg}/>
+            className='cursor-pointer '>
+                <p onClick={()=>{handleProfileClick(post.username)}} ><SmallProfile src={logoimg}/></p>
             </div>
-            <div className='border w-1/2 flex flex-col gap-4 p-2   bg-slate-700 bg-opacity-50 
+            <div className='border md:w-1/2 flex flex-col gap-4 p-2   bg-slate-700 bg-opacity-50 
                     backdrop-filter backdrop-blur-md  rounded-md px-6'>
                 <div>
                     <div className='font-semibold '>
@@ -134,7 +122,7 @@ export const Post = ({post})=>{
                 <CarouselBasicExample sources={post.images || [lg,lg,lg]}/>
                 </div>
                 <div><Tags tags={["t1","t1","t1","t1","t1","t1",]}/></div>
-                <div className='flex gap-4 items-center'>
+                <div className='flex gap-4 items-center flex-wrap'>
                     <p className='flex'>4<Upvotes/></p>
                     <p className='flex'>4<DownVotes/></p>
                     <p 

@@ -12,10 +12,9 @@ const Layout = () => {
       <Header/>
       <Container>
         <Search/>
-        <AlignRight>
+        {/* <AlignRight> */}
             <PostQuestion/>
-        </AlignRight>
-        {showEditor && <Editor className={''} placeholder={"yooo"}></Editor>}
+        {/* </AlignRight> */}
         <Outlet/>
 
 

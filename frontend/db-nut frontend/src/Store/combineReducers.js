@@ -5,13 +5,15 @@ import LoderReducer from './loaderSlice'
 import PopupReducer from './PopupSlice'
 import FeedReducer from './feedSlice'
 import questionReducer from './displayQuestionSlice'
+import textReducer from './textSlice'
 const rootReducer = combineReducers({
     login : LoginReducer,
     editor:editorReducer,
     loader:LoderReducer,
     popup:PopupReducer,
     feed:FeedReducer,
-    question:questionReducer
+    question:questionReducer,
+    text:textReducer
   });
 
 export default rootReducer
